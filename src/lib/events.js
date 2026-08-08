@@ -321,6 +321,34 @@ function csvToEvents(text) {
 let cache = null;
 
 /**
+ * Says out loud where the schedule came from.
+ *
+ * Bundled data renders perfectly well, so a sheet that never connected looks
+ * exactly like one that is working. This records the answer in one obvious
+ * place — type `__hglEvents` in the console to see it — so "is it live?" is a
+ * question with a checkable answer rather than a guess.
+ */
+function reportSource(source, message, level = 'info') {
+  const detail = {
+    source,
+    message,
+    sheetConfigured: Boolean(SHEET_CSV_URL),
+    sheetUrl: SHEET_CSV_URL || null,
+    checkedAt: new Date().toISOString(),
+  };
+
+  if (typeof window !== 'undefined') window.__hglEvents = detail;
+
+  const label = source === 'sheet' ? '%c[events] SHEET' : '%c[events] BUNDLED';
+  const style =
+    source === 'sheet'
+      ? 'background:#E8B04A;color:#111;padding:2px 6px;border-radius:3px;font-weight:600'
+      : 'background:#333;color:#fff;padding:2px 6px;border-radius:3px;font-weight:600';
+
+  console[level === 'warn' ? 'warn' : 'info'](`${label}%c ${message}`, style, '');
+}
+
+/**
  * Returns every event, soonest first, enriched with venue, seats and badge.
  * Falls back to bundled data if the sheet is configured but unreachable.
  */
@@ -358,13 +386,21 @@ export async function loadEvents({ force = false } = {}) {
       const parsed = csvToEvents(body);
       if (parsed.length) {
         source = parsed;
-        console.info(`[events] Loaded ${parsed.length} event(s) from the connected sheet.`);
+        reportSource('sheet', `Loaded ${parsed.length} event(s) from the connected sheet.`);
       } else {
         throw new Error('Sheet parsed to zero usable rows');
       }
     } catch (err) {
-      console.warn('[events] Falling back to the bundled schedule:', err.message);
+      reportSource('bundled', `Sheet failed, using the bundled schedule — ${err.message}`, 'warn');
     }
+  } else {
+    // Without this the unconfigured case is completely silent, which makes a
+    // sheet that was never connected indistinguishable from one that is
+    // working. That ambiguity is worse than either outcome.
+    reportSource(
+      'bundled',
+      'No sheet connected — using the bundled schedule. Set VITE_EVENTS_SHEET_CSV and rebuild to connect one.'
+    );
   }
 
   cache = source
