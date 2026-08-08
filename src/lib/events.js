@@ -1,5 +1,6 @@
 import rawEvents from '../data/events.json';
 import venues from '../data/venues.json';
+import { EVENTS_SHEET_CSV } from '../config';
 
 /**
  * Where the schedule comes from.
@@ -12,14 +13,14 @@ import venues from '../data/venues.json';
  *      slug, title, home, homeColor, away, awayColor, league, startsAt,
  *      venue, capacity, seatsTaken, blurb
  *   2. File > Share > Publish to web > select the sheet > Comma-separated values
- *   3. Paste the published URL into a `.env` file as:
- *      VITE_EVENTS_SHEET_CSV="https://docs.google.com/.../pub?output=csv"
+ *   3. Paste that URL into EVENTS_SHEET_CSV in src/config.js and push.
+ *      It must end in /pub?output=csv — /pubhtml returns a web page, not data.
  *
  * No API key is needed and edits go live within a few minutes without a
  * redeploy. If the sheet is ever unreachable the bundled JSON is used instead,
  * so the site cannot render an empty schedule.
  */
-const SHEET_CSV_URL = import.meta.env.VITE_EVENTS_SHEET_CSV || '';
+const SHEET_CSV_URL = import.meta.env.VITE_EVENTS_SHEET_CSV || EVENTS_SHEET_CSV || '';
 
 /**
  * The bundled schedule is demo data. Rather than letting it silently go stale
