@@ -1,0 +1,123 @@
+[
+  {
+    "slug": "par-4-kitchen-bar",
+    "name": "Par 4 Kitchen & Bar",
+    "shortName": "Par 4",
+    "city": "Surrey",
+    "region": "BC",
+    "neighbourhood": "Guildford",
+    "featured": true,
+    "tagline": "Where great food meets game-day energy.",
+    "blurb": "A modern sports bar and kitchen where great food meets game-day energy. With large screens, a craft drink list, and a warm community feel, Par 4 is where fans come together to watch, cheer, and celebrate.",
+    "features": [
+      "Great food & game-day specials",
+      "Large screens & premium sound",
+      "Friendly, welcoming atmosphere",
+      "Craft drinks & curated menu",
+      "Game-night experience designed for fans"
+    ],
+    "ratings": { "Screen Quality": 5, "Craft List": 4, "Vibe Check": 5 },
+    "capacityNote": "Seats up to 60 for watch parties",
+    "gradient": "from-[#2a1d0d] via-[#191308] to-[#0d0b06]"
+  },
+  {
+    "slug": "the-flying-beaver",
+    "name": "The Flying Beaver",
+    "shortName": "The Beaver",
+    "city": "Richmond",
+    "region": "BC",
+    "neighbourhood": "Bridgeport",
+    "featured": false,
+    "tagline": "Waterfront patio, floatplanes, and football.",
+    "blurb": "A Richmond institution on the water. Watch floatplanes land between plays from the heated patio, or grab a booth inside where every angle has a screen.",
+    "features": [
+      "Heated waterfront patio",
+      "Wraparound screen coverage",
+      "Local craft taps on rotation",
+      "Group tables for 8+"
+    ],
+    "ratings": { "Screen Quality": 4, "Craft List": 5, "Vibe Check": 4 },
+    "capacityNote": "Seats up to 80 for watch parties",
+    "gradient": "from-[#0d1f2a] via-[#0a1620] to-[#060d12]"
+  },
+  {
+    "slug": "tap-and-barrel",
+    "name": "Tap & Barrel",
+    "shortName": "Tap & Barrel",
+    "city": "Vancouver",
+    "region": "BC",
+    "neighbourhood": "Olympic Village",
+    "featured": false,
+    "tagline": "False Creek views and forty taps.",
+    "blurb": "Big, bright, and built for a crowd. The patio looks straight across False Creek and the interior turns into a wall of sound when the game is close.",
+    "features": [
+      "40+ BC craft taps",
+      "Wall-to-wall screens",
+      "Waterfront patio seating",
+      "Shareable game-day boards"
+    ],
+    "ratings": { "Screen Quality": 5, "Craft List": 5, "Vibe Check": 5 },
+    "capacityNote": "Seats up to 100 for watch parties",
+    "gradient": "from-[#1c2410] via-[#12180b] to-[#080b05]"
+  },
+  {
+    "slug": "court-house-lounge",
+    "name": "Court House Lounge",
+    "shortName": "Court House",
+    "city": "Vancouver",
+    "region": "BC",
+    "neighbourhood": "Gastown",
+    "featured": false,
+    "tagline": "A basketball bar that takes basketball seriously.",
+    "blurb": "Low light, leather booths, and a projector wall that makes a Tuesday night NBA game feel like courtside. The cocktail list is the best on this list.",
+    "features": [
+      "12-foot projector wall",
+      "Craft cocktail programme",
+      "Late kitchen until 1am",
+      "Booth reservations available"
+    ],
+    "ratings": { "Screen Quality": 5, "Craft List": 5, "Vibe Check": 4 },
+    "capacityNote": "Seats up to 50 for watch parties",
+    "gradient": "from-[#241221] via-[#180c17] to-[#0b060a]"
+  },
+  {
+    "slug": "stadium-district-bar",
+    "name": "Stadium District Bar",
+    "shortName": "Stadium District",
+    "city": "New Westminster",
+    "region": "BC",
+    "neighbourhood": "Downtown",
+    "featured": false,
+    "tagline": "The loudest room we work with, by design.",
+    "blurb": "Stadium seating, a proper sound system, and a crowd that shows up in jerseys. If you want the closest thing to being in the building, this is it.",
+    "features": [
+      "Tiered stadium seating",
+      "Broadcast-grade sound",
+      "Jersey night drink specials",
+      "Big-group friendly"
+    ],
+    "ratings": { "Screen Quality": 4, "Craft List": 3, "Vibe Check": 5 },
+    "capacityNote": "Seats up to 120 for watch parties",
+    "gradient": "from-[#2a1410] via-[#1a0d0a] to-[#0c0605]"
+  },
+  {
+    "slug": "the-charles-bar",
+    "name": "The Charles Bar",
+    "shortName": "The Charles",
+    "city": "Burnaby",
+    "region": "BC",
+    "neighbourhood": "Brentwood",
+    "featured": false,
+    "tagline": "Neighbourhood room, championship atmosphere.",
+    "blurb": "The kind of place where the bartender remembers your order by the second visit. Comfortable, unpretentious, and packed every time the Raptors are on.",
+    "features": [
+      "Neighbourhood regulars welcome",
+      "Screens at every seat",
+      "Weekly prize draws",
+      "Kitchen open late"
+    ],
+    "ratings": { "Screen Quality": 4, "Craft List": 4, "Vibe Check": 5 },
+    "capacityNote": "Seats up to 70 for watch parties",
+    "gradient": "from-[#101f24] via-[#0a1418] to-[#050a0c]"
+  }
+]

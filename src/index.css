@@ -1,0 +1,75 @@
+/* Self-hosted so there is no external CDN request to fail or slow the first
+   paint. The original design used font-display/font-serif classes but never
+   loaded a face for them, so everything fell back to the system UI font. */
+@import '@fontsource-variable/manrope';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/jetbrains-mono';
+@import '@fontsource/instrument-serif';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    /* Header is sticky; keep anchor targets from hiding underneath it. */
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    @apply bg-ink font-body text-white antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display;
+  }
+
+  /* Visible, on-brand focus ring for keyboard users. The original had none. */
+  :focus-visible {
+    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-ink;
+  }
+
+  ::selection {
+    @apply bg-gold text-ink;
+  }
+}
+
+@layer components {
+  .eyebrow {
+    @apply block font-mono text-xs uppercase tracking-[0.2em] text-gold;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-all duration-300;
+  }
+
+  .btn-gold {
+    @apply btn bg-gold px-7 py-4 text-ink shadow-[0_8px_32px_rgba(232,176,74,0.3)] hover:bg-gold-light;
+  }
+
+  .btn-ghost {
+    @apply btn border border-white/15 px-7 py-4 text-white hover:border-white/40 hover:bg-white/5;
+  }
+
+  .shell {
+    @apply mx-auto w-full max-w-7xl px-6 lg:px-10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
