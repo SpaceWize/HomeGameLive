@@ -3,6 +3,7 @@ import { Calendar, Clock, MapPin, Ticket, Trash2 } from 'lucide-react';
 import { useAuth } from '../lib/auth.jsx';
 import { formatLongDate, formatTime } from '../lib/events';
 import { PageHeader } from '../components/Primitives';
+import AddToCalendarButton from '../components/AddToCalendarButton';
 
 export default function Account() {
   const { user, myReservations, cancelReservation } = useAuth();
@@ -74,13 +75,26 @@ export default function Account() {
                           </div>
                         </div>
 
-                        <button
-                          type="button"
-                          onClick={() => cancelReservation(r.id)}
-                          className="btn flex-shrink-0 border border-white/12 px-4 py-2.5 text-xs text-white/55 hover:border-flames/50 hover:text-flames"
-                        >
-                          <Trash2 size={14} /> Cancel
-                        </button>
+                        <div className="flex flex-shrink-0 items-center gap-2">
+                          <AddToCalendarButton
+                            event={{
+                              id: r.eventId,
+                              slug: r.eventSlug,
+                              title: r.eventTitle,
+                              startsAt: r.startsAt,
+                              venueName: r.venueName,
+                            }}
+                            label="Add to calendar"
+                            className="!px-4 !py-2.5 !text-xs"
+                          />
+                          <button
+                            type="button"
+                            onClick={() => cancelReservation(r.id)}
+                            className="btn border border-white/12 px-4 py-2.5 text-xs text-white/55 hover:border-flames/50 hover:text-flames"
+                          >
+                            <Trash2 size={14} /> Cancel
+                          </button>
+                        </div>
                       </li>
                     ))}
                   </ul>

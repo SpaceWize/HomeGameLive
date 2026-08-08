@@ -14,6 +14,9 @@ import {
 import { useEvents } from '../lib/useEvents';
 import { formatLongDate, formatShortDate, formatTime, formatWeekRange, getVenues } from '../lib/events';
 import { Badge, SeatsLeft, TeamCrest, VenueVisual } from '../components/Primitives';
+import Countdown from '../components/Countdown';
+import SeatMeter from '../components/SeatMeter';
+import Reveal from '../components/Reveal';
 import { asset } from '../lib/asset';
 import EventRow from '../components/EventRow';
 import ReserveButton from '../components/ReserveButton';
@@ -93,8 +96,12 @@ function NextUpCard({ event, following }) {
             {event.venueName} · {event.city}
           </p>
           <div className="flex justify-center pt-1">
-            <SeatsLeft count={event.seatsLeft} />
+            <Countdown startsAt={event.startsAt} />
           </div>
+        </div>
+
+        <div className="mt-4">
+          <SeatMeter capacity={event.capacity} seatsLeft={event.seatsLeft} />
         </div>
 
         <div className="mt-5">
@@ -269,17 +276,16 @@ export default function Home() {
           </div>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {WHY.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-7 transition-colors duration-300 hover:border-gold/25 hover:bg-white/[0.04]"
-              >
-                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold">
-                  <Icon size={22} />
-                </span>
-                <h3 className="font-display text-lg font-semibold text-white">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-white/45">{body}</p>
-              </div>
+            {WHY.map(({ icon: Icon, title, body }, i) => (
+              <Reveal key={title} delay={i * 90} className="h-full">
+                <div className="h-full rounded-3xl border border-white/[0.06] bg-white/[0.02] p-7 transition-colors duration-300 hover:border-gold/25 hover:bg-white/[0.04]">
+                  <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                    <Icon size={22} />
+                  </span>
+                  <h3 className="font-display text-lg font-semibold text-white">{title}</h3>
+                  <p className="mt-3 text-sm leading-relaxed text-white/45">{body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>

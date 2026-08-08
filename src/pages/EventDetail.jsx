@@ -4,6 +4,9 @@ import { useEvents } from '../lib/useEvents';
 import { formatLongDate, formatTime } from '../lib/events';
 import { Badge, SeatsLeft, TeamCrest } from '../components/Primitives';
 import ReserveButton from '../components/ReserveButton';
+import AddToCalendarButton from '../components/AddToCalendarButton';
+import Countdown from '../components/Countdown';
+import SeatMeter from '../components/SeatMeter';
 import NotFound from './NotFound';
 
 export default function EventDetail() {
@@ -109,20 +112,32 @@ export default function EventDetail() {
 
                 <div className="flex items-start gap-3">
                   <Users size={17} className="mt-0.5 flex-shrink-0 text-gold" />
-                  <div>
+                  <div className="min-w-0 flex-1">
                     <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
                       Availability
                     </dt>
                     <dd className="mt-1.5">
                       <SeatsLeft count={event.seatsLeft} />
+                      <div className="mt-3">
+                        <SeatMeter
+                          capacity={event.capacity}
+                          seatsLeft={event.seatsLeft}
+                          showLabel={false}
+                        />
+                      </div>
                     </dd>
                   </div>
                 </div>
               </dl>
 
-              <div className="mt-7 border-t border-white/5 pt-6">
+              <div className="mt-6 border-t border-white/5 pt-5">
+                <Countdown startsAt={event.startsAt} />
+              </div>
+
+              <div className="mt-5 space-y-3">
                 <ReserveButton event={event} variant="gold" className="w-full !py-4" />
-                <p className="mt-3 text-center text-[11px] text-white/30">
+                <AddToCalendarButton event={event} className="w-full" />
+                <p className="text-center text-[11px] text-white/30">
                   Free to reserve · Cancel anytime from your account
                 </p>
               </div>
