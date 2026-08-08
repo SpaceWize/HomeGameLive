@@ -124,8 +124,27 @@ export function deriveBadge(event, now = new Date()) {
 
 const venueBySlug = new Map(venues.map((v) => [v.slug, v]));
 
-export function getVenue(slug) {
-  return venueBySlug.get(slug) || null;
+/** "Par 4 Kitchen & Bar" -> "par-4-kitchen-bar" */
+const slugify = (value) =>
+  String(value)
+    .toLowerCase()
+    .replace(/&/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const venueByName = new Map(venues.map((v) => [slugify(v.name), v]));
+
+/**
+ * Accepts either a slug or the venue's display name.
+ *
+ * Someone maintaining the schedule in a spreadsheet will type "Par 4 Kitchen
+ * & Bar", not "par-4-kitchen-bar". Matching on both means a human-entered
+ * value resolves instead of silently rendering "Venue TBA".
+ */
+export function getVenue(reference) {
+  if (!reference) return null;
+  const key = String(reference).trim();
+  return venueBySlug.get(key) || venueByName.get(slugify(key)) || null;
 }
 
 export function getVenues() {
@@ -136,6 +155,9 @@ function enrich(event, now) {
   const venue = getVenue(event.venue);
   return {
     ...event,
+    // Normalise to the slug so /venues/:slug links work even when the source
+    // data referenced the venue by its display name.
+    venue: venue?.slug ?? event.venue,
     venueName: venue?.name ?? 'Venue TBA',
     city: venue ? `${venue.city}, ${venue.region}` : '',
     venueData: venue,

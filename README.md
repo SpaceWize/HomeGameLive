@@ -52,8 +52,23 @@ VITE_EVENTS_SHEET_CSV="https://docs.google.com/.../pub?output=csv"
 
 Columns: `slug, title, home, homeColor, away, awayColor, league, startsAt, venue, capacity, seatsTaken, blurb`
 
-No API key is needed. Edits go live within a few minutes with no redeploy. If the sheet is ever
-unreachable the bundled JSON is used instead, so the schedule can never render empty.
+`events-template.csv` in this repo holds the current schedule in exactly that shape — import it
+into a blank Sheet (**File → Import → Upload**) rather than building the columns by hand.
+
+The `venue` column accepts either the slug (`par-4-kitchen-bar`) or the display name
+(`Par 4 Kitchen & Bar`), so whoever maintains the sheet can type what they'd naturally type.
+
+No API key is needed. Only the sheet *URL* is baked in at build time — the fetch happens on page
+load, so **edits go live without a redeploy** (Google caches published CSV for a few minutes). If
+the sheet is ever unreachable the bundled JSON is used instead, so the schedule can never render
+empty.
+
+### Adding one event without a sheet
+
+Edit `src/data/events.json` — on github.com directly if you like. Pushing to `main` rebuilds and
+redeploys automatically. `seatsLeft` is computed as `capacity - seatsTaken`, and the
+`TONIGHT` / `TOMORROW` / `FILLING FAST` badges are derived from `startsAt` and the seat counts, so
+there is nothing else to keep in sync.
 
 > **Why a Sheet rather than Google Calendar:** seat availability changes daily, and Google Calendar
 > has no field for it — you would end up parsing "18 seats left" out of the description. A Sheet
