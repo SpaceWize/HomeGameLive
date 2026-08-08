@@ -234,28 +234,88 @@ function parseCsv(text) {
   return rows;
 }
 
+/**
+ * Tolerant date parsing.
+ *
+ * Google Sheets frequently reformats a pasted ISO timestamp into its own
+ * display format on export, so the sheet will not always hand back exactly
+ * what was typed into it. Anything genuinely unparseable returns null and the
+ * row is dropped rather than rendering "Invalid Date" on the page.
+ */
+function parseEventDate(raw) {
+  if (!raw) return null;
+  const value = String(raw).trim();
+  if (!value) return null;
+
+  const direct = new Date(value);
+  if (!Number.isNaN(direct.getTime())) return direct;
+
+  // "DD/MM/YYYY HH:mm" — Date() reads slashed dates as US M/D/Y, so a sheet
+  // set to a non-US locale needs handling explicitly.
+  const match = value.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ ,]+(\d{1,2}):(\d{2}))?/);
+  if (match) {
+    const [, a, b, year, hour = '0', minute = '0'] = match;
+    // Only reachable when the first field cannot be a month.
+    if (Number(a) > 12) {
+      const parsed = new Date(year, Number(b) - 1, Number(a), Number(hour), Number(minute));
+      if (!Number.isNaN(parsed.getTime())) return parsed;
+    }
+  }
+
+  return null;
+}
+
 function csvToEvents(text) {
   const rows = parseCsv(text).filter((r) => r.some((c) => c.trim()));
   if (rows.length < 2) throw new Error('Sheet has no data rows');
 
-  const headers = rows[0].map((h) => h.trim());
-  return rows.slice(1).map((cells, i) => {
-    const get = (key) => (cells[headers.indexOf(key)] ?? '').trim();
-    const slug = get('slug') || `sheet-event-${i}`;
+  const headers = rows[0].map((h) => h.trim().toLowerCase());
+  const skipped = [];
+
+  const events = rows.slice(1).map((cells, i) => {
+    const get = (key) => (cells[headers.indexOf(key.toLowerCase())] ?? '').trim();
+
+    const title = get('title');
+    const startsAt = parseEventDate(get('startsAt'));
+
+    // A row is only usable with a name and a real date. Everything else has a
+    // sensible default, so one half-finished row cannot break the schedule.
+    if (!title || !startsAt) {
+      skipped.push({ row: i + 2, title: title || '(no title)', reason: !title ? 'missing title' : 'unreadable date' });
+      return null;
+    }
+
+    const slug =
+      get('slug') ||
+      title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') ||
+      `sheet-event-${i}`;
+
+    const capacity = Math.max(0, Number(get('capacity')) || 0);
+    const seatsTaken = Math.min(capacity, Math.max(0, Number(get('seatsTaken')) || 0));
+
     return {
       id: `sheet-${slug}`,
       slug,
-      title: get('title'),
-      home: { name: get('home'), color: get('homeColor') || '#E8B04A' },
-      away: { name: get('away'), color: get('awayColor') || '#5C5C5C' },
+      title,
+      home: { name: get('home') || title.split(/\s+vs\s+/i)[0] || 'Home', color: get('homeColor') || '#E8B04A' },
+      away: { name: get('away') || title.split(/\s+vs\s+/i)[1] || 'Away', color: get('awayColor') || '#5C5C5C' },
       league: get('league'),
-      startsAt: get('startsAt'),
+      startsAt: startsAt.toISOString(),
       venue: get('venue'),
-      capacity: Number(get('capacity')) || 0,
-      seatsTaken: Number(get('seatsTaken')) || 0,
+      capacity,
+      seatsTaken,
       blurb: get('blurb'),
     };
   });
+
+  if (skipped.length) {
+    console.warn(
+      `[events] Skipped ${skipped.length} unusable sheet row(s):`,
+      skipped.map((s) => `row ${s.row} — ${s.reason}`).join('; ')
+    );
+  }
+
+  return events.filter(Boolean);
 }
 
 let cache = null;
@@ -272,12 +332,38 @@ export async function loadEvents({ force = false } = {}) {
 
   if (SHEET_CSV_URL) {
     try {
-      const res = await fetch(SHEET_CSV_URL);
+      // A unique param plus no-store keeps the browser and any intermediate
+      // proxy from serving a stale copy. Google's own CDN still caches a
+      // published sheet for a few minutes, which is the real limit on how
+      // fast an edit appears.
+      let url = SHEET_CSV_URL;
+      try {
+        const parsedUrl = new URL(SHEET_CSV_URL);
+        parsedUrl.searchParams.set('_hgl', Date.now().toString());
+        url = parsedUrl.toString();
+      } catch {
+        // Relative URL (used by the local sheet test) — leave it as given.
+      }
+
+      const res = await fetch(url, { cache: 'no-store' });
       if (!res.ok) throw new Error(`Sheet responded ${res.status}`);
-      const parsed = csvToEvents(await res.text());
-      if (parsed.length) source = parsed;
+
+      const body = await res.text();
+      // A sheet that is not shared publicly returns an HTML sign-in page with
+      // a 200, so check the shape rather than trusting the status code.
+      if (/^\s*</.test(body)) {
+        throw new Error('Sheet returned HTML, not CSV — check it is published to the web');
+      }
+
+      const parsed = csvToEvents(body);
+      if (parsed.length) {
+        source = parsed;
+        console.info(`[events] Loaded ${parsed.length} event(s) from the connected sheet.`);
+      } else {
+        throw new Error('Sheet parsed to zero usable rows');
+      }
     } catch (err) {
-      console.warn('[events] Falling back to bundled schedule:', err.message);
+      console.warn('[events] Falling back to the bundled schedule:', err.message);
     }
   }
 

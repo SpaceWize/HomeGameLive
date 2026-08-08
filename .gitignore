@@ -7,3 +7,7 @@ dist-ssr
 !.env.example
 .DS_Store
 *.log
+
+# Vite writes these while resolving the config on Windows
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
