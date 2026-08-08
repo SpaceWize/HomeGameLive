@@ -3,6 +3,7 @@ import { ArrowLeft, Check, MapPin } from 'lucide-react';
 import { getVenue } from '../lib/events';
 import { useEvents } from '../lib/useEvents';
 import EventRow from '../components/EventRow';
+import { VenueVisual } from '../components/Primitives';
 import NotFound from './NotFound';
 
 export default function VenueDetail() {
@@ -53,22 +54,20 @@ export default function VenueDetail() {
               </div>
             </div>
 
-            <div
-              className={`relative flex min-h-[340px] items-end overflow-hidden rounded-[2rem] bg-gradient-to-br ${venue.gradient} p-8`}
+            <VenueVisual
+              venue={venue}
+              priority
+              className="flex min-h-[340px] items-end rounded-[2rem] p-8"
             >
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(232,176,74,0.18),transparent_60%)]"
-              />
               <div className="relative">
                 <p className="font-serif text-2xl italic leading-snug text-white/80">
                   “{venue.tagline}”
                 </p>
-                <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-white/40">
+                <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.14em] text-white/50">
                   {venue.capacityNote}
                 </p>
               </div>
-            </div>
+            </VenueVisual>
           </div>
 
           <ul className="mt-14 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">

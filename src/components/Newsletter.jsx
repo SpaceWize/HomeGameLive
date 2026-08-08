@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Check, Send } from 'lucide-react';
 import { subscribe } from '../lib/auth.jsx';
+import { asset } from '../lib/asset';
 import { FormMessage } from './Primitives';
 
 /**
@@ -33,6 +34,17 @@ export default function Newsletter() {
 
   return (
     <section className="relative overflow-hidden bg-ink py-24 lg:py-32">
+      <div aria-hidden="true" className="absolute inset-0">
+        <img
+          src={asset('images/newsletter-bar.png')}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          className="h-full w-full object-cover opacity-30"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/70 to-ink/95" />
+      </div>
+
       <div
         aria-hidden="true"
         className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-[140px]"

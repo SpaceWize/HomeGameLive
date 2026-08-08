@@ -13,7 +13,8 @@ import {
 } from 'lucide-react';
 import { useEvents } from '../lib/useEvents';
 import { formatLongDate, formatShortDate, formatTime, formatWeekRange, getVenues } from '../lib/events';
-import { Badge, SeatsLeft, TeamCrest } from '../components/Primitives';
+import { Badge, SeatsLeft, TeamCrest, VenueVisual } from '../components/Primitives';
+import { asset } from '../lib/asset';
 import EventRow from '../components/EventRow';
 import ReserveButton from '../components/ReserveButton';
 import Newsletter from '../components/Newsletter';
@@ -175,19 +176,31 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="flex w-full justify-center lg:w-[42%]">
-            <div className="relative w-full max-w-sm">
+          <div className="relative w-full lg:w-[42%]">
+            <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+              <img
+                src={asset('images/hero-watch-party.png')}
+                alt="Friends cheering at a sports watch party"
+                fetchpriority="high"
+                decoding="async"
+                className="h-full w-full object-cover"
+              />
               <div
                 aria-hidden="true"
-                className="absolute -inset-6 rounded-[2.5rem] bg-gradient-to-br from-gold/15 via-transparent to-transparent blur-2xl"
+                className="absolute inset-0 bg-gradient-to-r from-ink via-ink/40 to-transparent lg:from-ink/90 lg:via-ink/20"
               />
-              <div className="relative">
-                {loading ? (
-                  <div className="h-[520px] w-full max-w-sm animate-pulse rounded-[2rem] border border-white/[0.06] bg-ink-card" />
-                ) : (
-                  <NextUpCard event={next} following={upcoming[1]} />
-                )}
-              </div>
+              <div
+                aria-hidden="true"
+                className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"
+              />
+            </div>
+
+            <div className="relative flex min-h-[560px] items-center justify-center p-4 lg:p-6">
+              {loading ? (
+                <div className="h-[500px] w-full max-w-sm animate-pulse rounded-[2rem] border border-white/[0.06] bg-ink-card/80" />
+              ) : (
+                <NextUpCard event={next} following={upcoming[1]} />
+              )}
             </div>
           </div>
         </div>
@@ -283,22 +296,19 @@ export default function Home() {
           </div>
 
           <div className="grid items-center gap-12 lg:grid-cols-2">
-            <div
-              className={`relative flex min-h-[380px] items-end overflow-hidden rounded-[2rem] bg-gradient-to-br ${featuredVenue.gradient} p-8`}
+            <VenueVisual
+              venue={featuredVenue}
+              className="flex min-h-[380px] items-end rounded-[2rem] p-8"
             >
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(232,176,74,0.18),transparent_60%)]"
-              />
               <div className="relative">
                 <span className="inline-flex items-center rounded-full bg-gold px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink">
                   Featured Partner
                 </span>
-                <p className="mt-4 flex items-center gap-1.5 text-sm text-white/60">
+                <p className="mt-4 flex items-center gap-1.5 text-sm text-white/70">
                   <MapPin size={13} /> {featuredVenue.city}, {featuredVenue.region}
                 </p>
               </div>
-            </div>
+            </VenueVisual>
 
             <div>
               <h3 className="font-display text-3xl font-semibold tracking-tight text-white lg:text-4xl">

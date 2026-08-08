@@ -1,4 +1,37 @@
 import { Link } from 'react-router-dom';
+import { asset } from '../lib/asset';
+
+/**
+ * A venue's visual. Uses the venue photo when there is one and falls back to
+ * its brand gradient otherwise, so a venue without photography still looks
+ * deliberate rather than broken.
+ */
+export function VenueVisual({ venue, className = '', priority = false, children }) {
+  return (
+    <div
+      className={`relative overflow-hidden bg-gradient-to-br ${venue.gradient} ${className}`}
+    >
+      {venue.image && (
+        <img
+          src={asset(venue.image)}
+          alt={`Inside ${venue.name}`}
+          loading={priority ? 'eager' : 'lazy'}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-gradient-to-t from-ink/90 via-ink/30 to-transparent"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(232,176,74,0.16),transparent_60%)]"
+      />
+      {children}
+    </div>
+  );
+}
 
 /** Team crest: the club's colour with its initials. */
 export function TeamCrest({ team, size = 'md' }) {

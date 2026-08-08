@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { getVenues } from '../lib/events';
 import { useEvents } from '../lib/useEvents';
-import { PageHeader } from '../components/Primitives';
+import { PageHeader, VenueVisual } from '../components/Primitives';
 
 export default function Venues() {
   const venues = getVenues();
@@ -29,13 +29,7 @@ export default function Venues() {
                   to={`/venues/${venue.slug}`}
                   className="group overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.02] transition-colors hover:border-gold/25"
                 >
-                  <div
-                    className={`relative flex h-44 items-end bg-gradient-to-br ${venue.gradient} p-6`}
-                  >
-                    <div
-                      aria-hidden="true"
-                      className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,rgba(232,176,74,0.16),transparent_60%)]"
-                    />
+                  <VenueVisual venue={venue} className="flex h-44 items-end p-6">
                     {venue.featured && (
                       <span className="absolute right-5 top-5 rounded-full bg-gold px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink">
                         Featured
@@ -44,7 +38,7 @@ export default function Venues() {
                     <p className="relative flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-white/70">
                       <MapPin size={12} /> {venue.city}, {venue.region}
                     </p>
-                  </div>
+                  </VenueVisual>
 
                   <div className="p-6">
                     <h2 className="font-display text-xl font-semibold tracking-tight text-white transition-colors group-hover:text-gold">
