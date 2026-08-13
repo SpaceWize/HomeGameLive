@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Ported from the original Base44 build so the rebuild reads as the
-        // same brand rather than a lookalike.
-        ink: '#111111',
-        'ink-card': '#11100f',
-        gold: {
-          DEFAULT: '#E8B04A',
-          bright: '#f4b455',
-          light: '#f7c478',
+        // Neutral, product-agnostic scheme. Tokens are named by role rather
+        // than by hue so the palette can be re-skinned without renaming
+        // anything downstream.
+        ink: '#0C0E13',
+        surface: '#141821',
+        accent: {
+          DEFAULT: '#6C8CFF',
+          bright: '#8AA3FF',
+          light: '#A3B8FF',
         },
-        cream: '#F8F5F0',
-        canucks: '#003F7D',
-        flames: '#C8102E',
+        paper: '#F3F4F7',
+        alert: '#E5484D',
       },
       fontFamily: {
         display: ['"Manrope Variable"', 'ui-sans-serif', 'system-ui', 'sans-serif'],

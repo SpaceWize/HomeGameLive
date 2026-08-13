@@ -8,7 +8,7 @@ import { site } from '../data/site';
 const ROLES = [
   {
     title: 'Venue Partnerships Lead',
-    type: 'Full time · Metro Vancouver',
+    type: 'Full time · Greater Rivermouth',
     body: 'Find and sign the rooms worth listing. You know the hospitality scene and can tell a great game-day venue from a merely busy one.',
   },
   {
@@ -24,12 +24,12 @@ export function Careers() {
       <PageHeader
         eyebrow="Careers"
         title="Work on nights worth showing up to"
-        lead="We're a small team building something local. If you know Metro Vancouver hospitality and care about doing it properly, we'd like to hear from you."
+        lead="We're a small team building something local. If you know Greater Rivermouth hospitality and care about doing it properly, we'd like to hear from you."
       />
 
       <section className="bg-ink py-16 lg:py-24">
         <div className="shell max-w-3xl">
-          <h2 className="mb-8 font-mono text-xs uppercase tracking-[0.18em] text-gold">Open roles</h2>
+          <h2 className="mb-8 font-mono text-xs uppercase tracking-[0.18em] text-accent">Open roles</h2>
 
           <ul className="space-y-4">
             {ROLES.map((role) => (
@@ -38,13 +38,13 @@ export function Careers() {
                 className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-7"
               >
                 <h3 className="font-display text-xl font-semibold text-white">{role.title}</h3>
-                <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-gold">
+                <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
                   {role.type}
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-white/45">{role.body}</p>
                 <Link
                   to="/contact"
-                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold hover:underline"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
                 >
                   Apply for this role <ArrowRight size={14} />
                 </Link>
@@ -59,7 +59,7 @@ export function Careers() {
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/45">
               Send us a note anyway. We keep good people in mind for when the next role opens.
             </p>
-            <Link to="/contact" className="btn-gold mt-7">
+            <Link to="/contact" className="btn-accent mt-7">
               Get in touch
             </Link>
           </div>
@@ -77,7 +77,7 @@ export function Press() {
       <PageHeader
         eyebrow="Press"
         title="Press & media"
-        lead="Writing about Home Game Live, Metro Vancouver hospitality, or how independent venues are filling their slow nights? We're happy to talk."
+        lead="Writing about Front Row, Greater Rivermouth hospitality, or how independent venues are filling their slow nights? We're happy to talk."
       />
 
       <section className="bg-ink py-16 lg:py-24">
@@ -86,7 +86,7 @@ export function Press() {
             <h2 className="font-display text-xl font-semibold text-white">Media enquiries</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/45">
               For interviews, venue visits, or comment on the local hospitality scene, email{' '}
-              <a href={`mailto:${site.email}`} className="text-gold hover:underline">
+              <a href={`mailto:${site.email}`} className="text-accent hover:underline">
                 {site.email}
               </a>{' '}
               and we'll come back to you within two business days.
@@ -96,7 +96,7 @@ export function Press() {
           <div className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-8">
             <h2 className="font-display text-xl font-semibold text-white">The short version</h2>
             <p className="mt-3 text-sm leading-relaxed text-white/45">
-              Home Game Live partners with exceptional venues across Metro Vancouver to host curated
+              Front Row partners with exceptional venues across Greater Rivermouth to host curated
               sports watch parties. Members reserve a seat for free; venues fill their room on nights
               that would otherwise be quiet. Over 500 people have joined a game night so far.
             </p>
@@ -110,7 +110,7 @@ export function Press() {
             </p>
             <Link
               to="/contact"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-gold hover:underline"
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-accent hover:underline"
             >
               Request assets <ArrowRight size={14} />
             </Link>
@@ -186,7 +186,7 @@ export function Help() {
         <div className="shell max-w-3xl space-y-14">
           {HELP.map((group) => (
             <div key={group.heading}>
-              <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.18em] text-gold">
+              <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.18em] text-accent">
                 {group.heading}
               </h2>
               <dl className="divide-y divide-white/5 border-y border-white/5">
@@ -205,7 +205,7 @@ export function Help() {
             <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/45">
               Send us the details and we'll sort it out.
             </p>
-            <Link to="/contact" className="btn-gold mt-7">
+            <Link to="/contact" className="btn-accent mt-7">
               Contact support
             </Link>
           </div>

@@ -4,7 +4,7 @@ import { formatDayLabel, formatTime } from '../lib/events';
 import { Badge, SeatsLeft } from './Primitives';
 import ReserveButton from './ReserveButton';
 
-/** One row in the schedule list, on the cream section background. */
+/** One row in the schedule list, on the paper section background. */
 export default function EventRow({ event }) {
   return (
     <div className="group border-b border-ink/10 py-6 transition-colors last:border-0 hover:bg-ink/[0.02]">
@@ -20,7 +20,7 @@ export default function EventRow({ event }) {
           <h3 className="font-display text-xl font-semibold tracking-tight text-ink">
             <Link
               to={`/events/${event.slug}`}
-              className="transition-colors hover:text-gold focus-visible:text-gold"
+              className="transition-colors hover:text-accent focus-visible:text-accent"
             >
               {event.title}
             </Link>
@@ -29,14 +29,14 @@ export default function EventRow({ event }) {
         </div>
 
         <p className="flex items-center gap-1.5 text-sm text-ink/70 lg:w-28 lg:flex-shrink-0">
-          <Clock size={13} className="text-gold" />
+          <Clock size={13} className="text-accent" />
           {formatTime(event.startsAt)}
         </p>
 
         <div className="lg:w-52 lg:flex-shrink-0">
           <Link
             to={`/venues/${event.venue}`}
-            className="truncate text-sm font-medium text-ink transition-colors hover:text-gold"
+            className="truncate text-sm font-medium text-ink transition-colors hover:text-accent"
           >
             {event.venueName}
           </Link>

@@ -19,7 +19,7 @@ export default function AddToCalendarButton({ event, className = '', label = 'Ad
     <button
       type="button"
       onClick={handle}
-      className={`btn border border-white/12 px-5 py-3 text-sm text-white/70 hover:border-gold/40 hover:text-gold ${className}`}
+      className={`btn border border-white/12 px-5 py-3 text-sm text-white/70 hover:border-accent/40 hover:text-accent ${className}`}
     >
       {done ? <Check size={15} /> : <CalendarPlus size={15} />}
       {done ? 'Downloaded' : label}

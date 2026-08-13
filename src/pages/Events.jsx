@@ -43,7 +43,7 @@ export default function Events() {
             aria-pressed={value === option}
             className={`rounded-full px-3.5 py-1.5 text-xs font-medium transition-colors ${
               value === option
-                ? 'bg-gold text-ink'
+                ? 'bg-accent text-ink'
                 : 'border border-white/12 text-white/55 hover:border-white/30 hover:text-white'
             }`}
           >
@@ -69,7 +69,7 @@ export default function Events() {
         )}
       </PageHeader>
 
-      <section className="bg-cream py-16 lg:py-24">
+      <section className="bg-paper py-16 lg:py-24">
         <div className="shell">
           {loading ? (
             <div className="space-y-4">

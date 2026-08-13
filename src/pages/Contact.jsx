@@ -33,7 +33,7 @@ export default function Contact() {
   };
 
   const inputClass =
-    'w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-gold/50 focus:bg-white/10';
+    'w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-accent/50 focus:bg-white/10';
 
   return (
     <>
@@ -52,7 +52,7 @@ export default function Contact() {
               [MapPin, 'Service area', site.serviceArea, null],
             ].map(([Icon, label, value, href]) => (
               <div key={label} className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-6">
-                <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/10 text-accent">
                   <Icon size={19} />
                 </span>
                 <p className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
@@ -61,7 +61,7 @@ export default function Contact() {
                 {href ? (
                   <a
                     href={href}
-                    className="mt-1.5 block text-sm font-medium text-white transition-colors hover:text-gold"
+                    className="mt-1.5 block text-sm font-medium text-white transition-colors hover:text-accent"
                   >
                     {value}
                   </a>
@@ -74,7 +74,7 @@ export default function Contact() {
             <div className="rounded-3xl border border-white/[0.07] p-6">
               <p className="text-sm leading-relaxed text-white/45">
                 Running a venue? The{' '}
-                <Link to="/partners" className="text-gold hover:underline">
+                <Link to="/partners" className="text-accent hover:underline">
                   partner application
                 </Link>{' '}
                 is the faster route — it asks the questions we'd ask anyway.
@@ -124,7 +124,7 @@ export default function Contact() {
                 className={inputClass}
               >
                 {TOPICS.map((topic) => (
-                  <option key={topic} value={topic} className="bg-ink-card">
+                  <option key={topic} value={topic} className="bg-surface">
                     {topic}
                   </option>
                 ))}
@@ -163,7 +163,7 @@ export default function Contact() {
               </FormMessage>
             )}
 
-            <button type="submit" className="btn-gold w-full">
+            <button type="submit" className="btn-accent w-full">
               Send message <ArrowRight size={16} />
             </button>
           </form>

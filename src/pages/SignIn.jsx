@@ -56,7 +56,7 @@ export default function SignIn() {
   };
 
   const inputClass =
-    'w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-gold/50 focus:bg-white/10';
+    'w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-accent/50 focus:bg-white/10';
 
   return (
     <div className="flex min-h-screen items-center justify-center px-6 pb-20 pt-32">
@@ -88,7 +88,7 @@ export default function SignIn() {
               onClick={() => switchMode(value)}
               aria-pressed={mode === value}
               className={`rounded-full py-2.5 text-sm font-medium transition-colors ${
-                mode === value ? 'bg-gold text-ink' : 'text-white/50 hover:text-white'
+                mode === value ? 'bg-accent text-ink' : 'text-white/50 hover:text-white'
               }`}
             >
               {label}
@@ -163,7 +163,7 @@ export default function SignIn() {
 
           <FormMessage tone="error">{error}</FormMessage>
 
-          <button type="submit" disabled={busy} className="btn-gold w-full disabled:opacity-60">
+          <button type="submit" disabled={busy} className="btn-accent w-full disabled:opacity-60">
             {busy && <Loader2 size={16} className="animate-spin" />}
             {mode === 'signin' ? 'Sign In' : 'Create Account'}
             {!busy && <ArrowRight size={16} />}
@@ -171,7 +171,7 @@ export default function SignIn() {
         </form>
 
         <div className="mt-7 flex items-start gap-3 rounded-2xl border border-white/[0.07] bg-white/[0.02] px-4 py-4">
-          <ShieldCheck size={17} className="mt-0.5 flex-shrink-0 text-gold" />
+          <ShieldCheck size={17} className="mt-0.5 flex-shrink-0 text-accent" />
           <p className="text-xs leading-relaxed text-white/45">
             <span className="font-medium text-white/70">Your account stays on this device.</span>{' '}
             Accounts and reservations are saved in your own browser only — nothing is transmitted to
@@ -183,7 +183,7 @@ export default function SignIn() {
         {!isPartner && (
           <p className="mt-6 text-center text-xs text-white/35">
             Running a venue?{' '}
-            <Link to="/signin?role=partner" className="text-gold hover:underline">
+            <Link to="/signin?role=partner" className="text-accent hover:underline">
               Partner sign in
             </Link>
           </p>
@@ -191,7 +191,7 @@ export default function SignIn() {
         {isPartner && (
           <p className="mt-6 text-center text-xs text-white/35">
             Looking to book a seat?{' '}
-            <Link to="/signin" className="text-gold hover:underline">
+            <Link to="/signin" className="text-accent hover:underline">
               Fan sign in
             </Link>
           </p>

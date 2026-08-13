@@ -5,7 +5,7 @@ export default function NotFound() {
   return (
     <div className="flex min-h-screen items-center justify-center px-6 py-32">
       <div className="max-w-md text-center">
-        <p className="font-display text-7xl font-semibold text-gold/25">404</p>
+        <p className="font-display text-7xl font-semibold text-accent/25">404</p>
         <h1 className="mt-6 font-display text-3xl font-semibold tracking-tight text-white">
           That page isn't on the schedule.
         </h1>
@@ -14,7 +14,7 @@ export default function NotFound() {
         </p>
 
         <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-          <Link to="/events" className="btn-gold">
+          <Link to="/events" className="btn-accent">
             See what's on <ArrowRight size={16} />
           </Link>
           <Link to="/" className="btn-ghost">

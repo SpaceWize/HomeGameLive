@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react';
 import { footerNav, site } from '../data/site';
+import { brand } from '../config';
 
 const ICONS = { Instagram, Twitter, Facebook, YouTube: Youtube };
 
@@ -13,11 +14,14 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
           <div className="max-w-xs">
             <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold font-display text-sm font-bold text-ink">
-                HG
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent font-display text-sm font-bold text-ink">
+                {brand.monogram}
               </span>
               <span className="font-display text-lg font-semibold tracking-tight text-white">
-                Home Game <span className="text-gold">Live</span>
+                {brand.nameParts[0]}{' '}
+                {brand.nameParts.length > 1 && (
+                  <span className="text-accent">{brand.nameParts.slice(1).join(' ')}</span>
+                )}
               </span>
             </div>
             <p className="mt-5 text-sm leading-relaxed text-white/40">
@@ -35,7 +39,7 @@ export default function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${site.name} on ${item.name}`}
-                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors hover:border-gold/40 hover:text-gold"
+                      className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/50 transition-colors hover:border-accent/40 hover:text-accent"
                     >
                       <Icon size={17} />
                     </a>
@@ -47,7 +51,7 @@ export default function Footer() {
 
           {footerNav.map((group) => (
             <nav key={group.heading} aria-label={group.heading}>
-              <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-gold">
+              <h2 className="font-mono text-xs uppercase tracking-[0.18em] text-accent">
                 {group.heading}
               </h2>
               <ul className="mt-5 space-y-3">

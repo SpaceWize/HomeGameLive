@@ -24,7 +24,7 @@ export default function Cities() {
       <PageHeader
         eyebrow="Where We Are"
         title="Cities we host in"
-        lead="Home Game Live runs across Metro Vancouver. Pick your neighbourhood and find the room closest to you."
+        lead="Front Row runs across Greater Rivermouth. Pick your neighbourhood and find the room closest to you."
       />
 
       <section className="bg-ink py-16 lg:py-24">
@@ -38,7 +38,7 @@ export default function Cities() {
                 <div className="flex items-start justify-between gap-4">
                   <div>
                     <h2 className="flex items-center gap-2 font-display text-2xl font-semibold tracking-tight text-white">
-                      <MapPin size={18} className="text-gold" />
+                      <MapPin size={18} className="text-accent" />
                       {city.name}
                     </h2>
                     <p className="mt-1.5 font-mono text-[11px] uppercase tracking-[0.14em] text-white/35">
@@ -61,7 +61,7 @@ export default function Cities() {
                         </span>
                         <ArrowRight
                           size={14}
-                          className="flex-shrink-0 text-white/20 transition-transform group-hover:translate-x-0.5 group-hover:text-gold"
+                          className="flex-shrink-0 text-white/20 transition-transform group-hover:translate-x-0.5 group-hover:text-accent"
                         />
                       </Link>
                     </li>
@@ -80,7 +80,7 @@ export default function Cities() {
               put your own room forward.
             </p>
             <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-              <Link to="/partners" className="btn-gold">
+              <Link to="/partners" className="btn-accent">
                 List your venue
               </Link>
               <Link to="/contact" className="btn-ghost">

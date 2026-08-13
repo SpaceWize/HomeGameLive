@@ -56,16 +56,16 @@ export default function Partners() {
   };
 
   const inputClass =
-    'w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-gold/50 focus:bg-white/10';
+    'w-full rounded-2xl border border-white/15 bg-white/5 px-4 py-3.5 text-sm text-white outline-none transition-colors placeholder:text-white/25 focus:border-accent/50 focus:bg-white/10';
 
   return (
     <>
       <PageHeader
         eyebrow="For Venues"
         title="Own a great venue?"
-        lead="Partner with Home Game Live to fill seats during sports watch parties, attract new customers, and create game-day experiences that keep them coming back."
+        lead="Partner with Front Row to fill seats during sports watch parties, attract new customers, and create game-day experiences that keep them coming back."
       >
-        <a href="#apply" className="btn-gold">
+        <a href="#apply" className="btn-accent">
           Apply to partner <ArrowRight size={16} />
         </a>
       </PageHeader>
@@ -82,7 +82,7 @@ export default function Partners() {
                 key={title}
                 className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-7"
               >
-                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent">
                   <Icon size={22} />
                 </span>
                 <h3 className="font-display text-lg font-semibold text-white">{title}</h3>
@@ -93,7 +93,7 @@ export default function Partners() {
         </div>
       </section>
 
-      <section className="bg-ink-card py-16 lg:py-24">
+      <section className="bg-surface py-16 lg:py-24">
         <div className="shell">
           <h2 className="mb-12 font-display text-3xl font-semibold tracking-tight text-white lg:text-4xl">
             How partnering works
@@ -101,7 +101,7 @@ export default function Partners() {
           <ol className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((step, i) => (
               <li key={step} className="rounded-3xl border border-white/[0.06] p-6">
-                <span className="font-display text-3xl font-semibold text-gold/30">
+                <span className="font-display text-3xl font-semibold text-accent/30">
                   {String(i + 1).padStart(2, '0')}
                 </span>
                 <p className="mt-4 text-sm leading-relaxed text-white/55">{step}</p>
@@ -145,7 +145,7 @@ export default function Partners() {
                   id="city"
                   value={form.city}
                   onChange={update('city')}
-                  placeholder="Burnaby, BC"
+                  placeholder="Northgate, Rivermouth"
                   className={inputClass}
                 />
               </div>
@@ -213,14 +213,14 @@ export default function Partners() {
               </FormMessage>
             )}
 
-            <button type="submit" className="btn-gold w-full">
+            <button type="submit" className="btn-accent w-full">
               Submit application <ArrowRight size={16} />
             </button>
           </form>
 
           <p className="mt-8 text-center text-sm text-white/35">
             Already a partner?{' '}
-            <Link to="/signin?role=partner" className="text-gold hover:underline">
+            <Link to="/signin?role=partner" className="text-accent hover:underline">
               Partner sign in
             </Link>
           </p>

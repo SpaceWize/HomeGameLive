@@ -10,12 +10,14 @@ function parts(msRemaining) {
   };
 }
 
-/**
- * Live countdown to kickoff. The brand is "Home Game Live" — a ticking clock
- * earns that word in a way a static date never does.
- */
 /** Matches the .ics duration, so "live" lasts as long as the booking does. */
 const RUNTIME_MS = 3 * 60 * 60 * 1000;
+
+/**
+ * Counts down to kickoff, then reports the fixture as live and finally as
+ * finished. A ticking clock communicates immediacy in a way a static start
+ * time does not.
+ */
 
 export default function Countdown({ startsAt, className = '' }) {
   const [now, setNow] = useState(() => Date.now());
@@ -51,9 +53,9 @@ export default function Countdown({ startsAt, className = '' }) {
   if (started) {
     return (
       <span
-        className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-flames ${className}`}
+        className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.16em] text-alert ${className}`}
       >
-        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-flames" />
+        <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-alert" />
         Live now
       </span>
     );
@@ -84,9 +86,9 @@ export default function Countdown({ startsAt, className = '' }) {
     >
       <span className="text-white/30">Starts in</span>
       {segments.map(([value, unit]) => (
-        <span key={unit} className="tabular-nums text-gold">
+        <span key={unit} className="tabular-nums text-accent">
           {String(value).padStart(2, '0')}
-          <span className="text-gold/50">{unit}</span>
+          <span className="text-accent/50">{unit}</span>
         </span>
       ))}
     </span>

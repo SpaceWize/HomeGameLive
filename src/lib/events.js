@@ -125,7 +125,7 @@ export function deriveBadge(event, now = new Date()) {
 
 const venueBySlug = new Map(venues.map((v) => [v.slug, v]));
 
-/** "Par 4 Kitchen & Bar" -> "par-4-kitchen-bar" */
+/** "Harbour & Vine" -> "harbour-vine" */
 const slugify = (value) =>
   String(value)
     .toLowerCase()
@@ -138,9 +138,9 @@ const venueByName = new Map(venues.map((v) => [slugify(v.name), v]));
 /**
  * Accepts either a slug or the venue's display name.
  *
- * Someone maintaining the schedule in a spreadsheet will type "Par 4 Kitchen
- * & Bar", not "par-4-kitchen-bar". Matching on both means a human-entered
- * value resolves instead of silently rendering "Venue TBA".
+ * Someone maintaining the schedule in a spreadsheet will type "Harbour & Vine",
+ * not "harbour-and-vine". Matching on both means a human-entered value
+ * resolves instead of silently rendering "Venue TBA".
  */
 export function getVenue(reference) {
   if (!reference) return null;
@@ -298,7 +298,7 @@ function csvToEvents(text) {
       id: `sheet-${slug}`,
       slug,
       title,
-      home: { name: get('home') || title.split(/\s+vs\s+/i)[0] || 'Home', color: get('homeColor') || '#E8B04A' },
+      home: { name: get('home') || title.split(/\s+vs\s+/i)[0] || 'Home', color: get('homeColor') || '#6C8CFF' },
       away: { name: get('away') || title.split(/\s+vs\s+/i)[1] || 'Away', color: get('awayColor') || '#5C5C5C' },
       league: get('league'),
       startsAt: startsAt.toISOString(),
@@ -343,7 +343,7 @@ function reportSource(source, message, level = 'info') {
   const label = source === 'sheet' ? '%c[events] SHEET' : '%c[events] BUNDLED';
   const style =
     source === 'sheet'
-      ? 'background:#E8B04A;color:#111;padding:2px 6px;border-radius:3px;font-weight:600'
+      ? 'background:#6C8CFF;color:#111;padding:2px 6px;border-radius:3px;font-weight:600'
       : 'background:#333;color:#fff;padding:2px 6px;border-radius:3px;font-weight:600';
 
   console[level === 'warn' ? 'warn' : 'info'](`${label}%c ${message}`, style, '');

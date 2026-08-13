@@ -23,23 +23,23 @@ const STEPS = [
 const WHY = [
   {
     icon: Tv,
-    title: 'Great Venues',
-    body: 'We carefully select venues with the right atmosphere, screens, and energy for every game night.',
+    title: 'Rooms that work',
+    body: 'Screens where you can actually see them, sound you can hear over a full room, and sightlines that hold up once it fills.',
   },
   {
     icon: UtensilsCrossed,
-    title: 'Special Food & Drinks',
-    body: 'Exclusive menus and game-day specials crafted for the occasion by each venue.',
+    title: 'Kitchens open late',
+    body: 'Every venue commits to serving through to full time, with a short menu built for the fixture.',
   },
   {
     icon: Gift,
-    title: 'Win Prizes',
-    body: 'Gift cards, giveaways, and weekly rewards add excitement to every event.',
+    title: 'Something to play for',
+    body: 'Draws and small prizes that give the room a reason to look up between plays.',
   },
   {
     icon: Users,
-    title: 'Great People',
-    body: 'Meet new people or enjoy the night with friends — community is the whole point.',
+    title: 'A seat, not a scrum',
+    body: 'Reserving means you know there is somewhere to sit before you leave the house.',
   },
 ];
 
@@ -66,9 +66,9 @@ export default function HowItWorks() {
   return (
     <>
       <PageHeader
-        eyebrow="The Difference"
-        title="Why Home Game Live"
-        lead="We don't list events. We curate nights worth showing up for — at venues worth being seen at. Here's how a game night actually works."
+        eyebrow="How It Works"
+        title="Three steps, then just turn up."
+        lead="Reserving is free and takes one click. Here is what happens either side of it."
       />
 
       <section className="bg-ink py-16 lg:py-24">
@@ -77,7 +77,7 @@ export default function HowItWorks() {
             {STEPS.map(({ icon: Icon, title, body }, i) => (
               <li key={title} className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-7">
                 <div className="mb-5 flex items-center justify-between">
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent">
                     <Icon size={22} />
                   </span>
                   <span className="font-display text-3xl font-semibold text-white/10">
@@ -92,7 +92,7 @@ export default function HowItWorks() {
         </div>
       </section>
 
-      <section className="bg-ink-card py-16 lg:py-24">
+      <section className="bg-surface py-16 lg:py-24">
         <div className="shell">
           <h2 className="mb-12 font-display text-3xl font-semibold tracking-tight text-white lg:text-4xl">
             What makes a night worth it
@@ -100,7 +100,7 @@ export default function HowItWorks() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {WHY.map(({ icon: Icon, title, body }) => (
               <div key={title} className="rounded-3xl border border-white/[0.06] p-7">
-                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent">
                   <Icon size={22} />
                 </span>
                 <h3 className="font-display text-lg font-semibold text-white">{title}</h3>
@@ -126,7 +126,7 @@ export default function HowItWorks() {
           </dl>
 
           <div className="mt-12 flex flex-col gap-3 sm:flex-row">
-            <Link to="/events" className="btn-gold">
+            <Link to="/events" className="btn-accent">
               Find a game night <ArrowRight size={16} />
             </Link>
             <Link to="/help" className="btn-ghost">

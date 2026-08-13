@@ -45,11 +45,11 @@ export function buildIcs(event) {
   // every optional part is guarded rather than interpolated blindly.
   const description = [
     event.league
-      ? `${event.league} watch party hosted by Home Game Live.`
-      : 'Watch party hosted by Home Game Live.',
+      ? `${event.league} watch party hosted by Front Row.`
+      : 'Watch party hosted by Front Row.',
     event.blurb,
     '',
-    'Seat reserved via Home Game Live.',
+    'Seat reserved via Front Row.',
   ]
     .filter(Boolean)
     .join('\n');
@@ -57,11 +57,11 @@ export function buildIcs(event) {
   const lines = [
     'BEGIN:VCALENDAR',
     'VERSION:2.0',
-    'PRODID:-//Home Game Live//Watch Party//EN',
+    'PRODID:-//Front Row//Watch Party//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
     'BEGIN:VEVENT',
-    `UID:${event.id ?? event.slug ?? Date.now()}@homegamelive`,
+    `UID:${event.id ?? event.slug ?? Date.now()}@frontrow`,
     `DTSTAMP:${toIcsDate(new Date())}`,
     `DTSTART:${toIcsDate(start)}`,
     `DTEND:${toIcsDate(end)}`,

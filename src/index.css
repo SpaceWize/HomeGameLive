@@ -30,25 +30,25 @@
 
   /* Visible, on-brand focus ring for keyboard users. The original had none. */
   :focus-visible {
-    @apply outline-none ring-2 ring-gold ring-offset-2 ring-offset-ink;
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-ink;
   }
 
   ::selection {
-    @apply bg-gold text-ink;
+    @apply bg-accent text-ink;
   }
 }
 
 @layer components {
   .eyebrow {
-    @apply block font-mono text-xs uppercase tracking-[0.2em] text-gold;
+    @apply block font-mono text-xs uppercase tracking-[0.2em] text-accent;
   }
 
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-full text-sm font-semibold transition-all duration-300;
   }
 
-  .btn-gold {
-    @apply btn bg-gold px-7 py-4 text-ink shadow-[0_8px_32px_rgba(232,176,74,0.3)] hover:bg-gold-light;
+  .btn-accent {
+    @apply btn bg-accent px-7 py-4 text-ink shadow-[0_8px_32px_rgba(108,140,255,0.3)] hover:bg-accent-light;
   }
 
   .btn-ghost {

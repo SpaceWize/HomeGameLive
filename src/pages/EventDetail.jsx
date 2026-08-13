@@ -28,7 +28,7 @@ export default function EventDetail() {
         <div className="shell">
           <Link
             to="/events"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-white/40 transition-colors hover:text-gold"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-white/40 transition-colors hover:text-accent"
           >
             <ArrowLeft size={14} /> All events
           </Link>
@@ -67,10 +67,10 @@ export default function EventDetail() {
               </div>
             </div>
 
-            <aside className="rounded-[2rem] border border-white/[0.07] bg-ink-card p-7">
+            <aside className="rounded-[2rem] border border-white/[0.07] bg-surface p-7">
               <dl className="space-y-5">
                 <div className="flex items-start gap-3">
-                  <Calendar size={17} className="mt-0.5 flex-shrink-0 text-gold" />
+                  <Calendar size={17} className="mt-0.5 flex-shrink-0 text-accent" />
                   <div>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
                       Date
@@ -82,7 +82,7 @@ export default function EventDetail() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Clock size={17} className="mt-0.5 flex-shrink-0 text-gold" />
+                  <Clock size={17} className="mt-0.5 flex-shrink-0 text-accent" />
                   <div>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
                       Start time
@@ -94,13 +94,13 @@ export default function EventDetail() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <MapPin size={17} className="mt-0.5 flex-shrink-0 text-gold" />
+                  <MapPin size={17} className="mt-0.5 flex-shrink-0 text-accent" />
                   <div>
                     <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
                       Venue
                     </dt>
                     <dd className="mt-1 text-sm font-medium text-white">
-                      <Link to={`/venues/${event.venue}`} className="hover:text-gold">
+                      <Link to={`/venues/${event.venue}`} className="hover:text-accent">
                         {event.venueName}
                       </Link>
                       <span className="mt-0.5 block text-xs font-normal text-white/40">
@@ -111,7 +111,7 @@ export default function EventDetail() {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Users size={17} className="mt-0.5 flex-shrink-0 text-gold" />
+                  <Users size={17} className="mt-0.5 flex-shrink-0 text-accent" />
                   <div className="min-w-0 flex-1">
                     <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/35">
                       Availability
@@ -135,7 +135,7 @@ export default function EventDetail() {
               </div>
 
               <div className="mt-5 space-y-3">
-                <ReserveButton event={event} variant="gold" className="w-full !py-4" />
+                <ReserveButton event={event} variant="accent" className="w-full !py-4" />
                 <AddToCalendarButton event={event} className="w-full" />
                 <p className="text-center text-[11px] text-white/30">
                   Free to reserve · Cancel anytime from your account
@@ -157,7 +157,7 @@ export default function EventDetail() {
                 <Link
                   key={other.id}
                   to={`/events/${other.slug}`}
-                  className="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-gold/25 hover:bg-white/[0.04]"
+                  className="rounded-3xl border border-white/[0.06] bg-white/[0.02] p-6 transition-colors hover:border-accent/25 hover:bg-white/[0.04]"
                 >
                   <Badge label={other.badge} />
                   <h3 className="mt-3 font-display text-lg font-semibold text-white">

@@ -17,7 +17,6 @@ import { Badge, SeatsLeft, TeamCrest, VenueVisual } from '../components/Primitiv
 import Countdown from '../components/Countdown';
 import SeatMeter from '../components/SeatMeter';
 import Reveal from '../components/Reveal';
-import { asset } from '../lib/asset';
 import EventRow from '../components/EventRow';
 import ReserveButton from '../components/ReserveButton';
 import Newsletter from '../components/Newsletter';
@@ -25,23 +24,23 @@ import Newsletter from '../components/Newsletter';
 const WHY = [
   {
     icon: Tv,
-    title: 'Great Venues',
-    body: 'We carefully select venues with the right atmosphere, screens, and energy for every game night.',
+    title: 'Rooms that work',
+    body: 'Screens where you can actually see them, sound you can hear over a full room, and sightlines that hold up once it fills.',
   },
   {
     icon: UtensilsCrossed,
-    title: 'Special Food & Drinks',
-    body: 'Exclusive menus and game-day specials crafted for the occasion by each venue.',
+    title: 'Kitchens open late',
+    body: 'Every venue commits to serving through to full time, with a short menu built for the fixture.',
   },
   {
     icon: Gift,
-    title: 'Win Prizes',
-    body: 'Gift cards, giveaways, and weekly rewards add excitement to every event.',
+    title: 'Something to play for',
+    body: 'Draws and small prizes that give the room a reason to look up between plays.',
   },
   {
     icon: Users,
-    title: 'Great People',
-    body: 'Meet new people or enjoy the night with friends — community is the whole point.',
+    title: 'A seat, not a scrum',
+    body: 'Reserving means you know there is somewhere to sit before you leave the house.',
   },
 ];
 
@@ -49,7 +48,7 @@ const WHY = [
 function NextUpCard({ event, following }) {
   if (!event) {
     return (
-      <div className="rounded-[2rem] border border-white/10 bg-ink-card p-8 text-center">
+      <div className="rounded-[2rem] border border-white/10 bg-surface p-8 text-center">
         <p className="text-sm text-white/50">No games scheduled right now.</p>
         <Link to="/events" className="btn-ghost mt-5 !py-3 !text-xs">
           See the full calendar
@@ -59,13 +58,13 @@ function NextUpCard({ event, following }) {
   }
 
   return (
-    <div className="w-full max-w-sm overflow-hidden rounded-[2rem] border border-white/[0.06] bg-ink-card/95 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
+    <div className="w-full max-w-sm overflow-hidden rounded-[2rem] border border-white/[0.06] bg-surface/95 shadow-[0_24px_80px_rgba(0,0,0,0.6)] backdrop-blur-xl">
       <div className="flex items-center justify-between px-6 pt-6">
         <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/40">
           Next Up
         </span>
-        <span className="inline-flex items-center gap-1.5 rounded-full bg-gold/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-gold">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-gold-bright" />
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.14em] text-accent">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent-bright" />
           {event.badge ?? 'Upcoming'}
         </span>
       </div>
@@ -89,7 +88,7 @@ function NextUpCard({ event, following }) {
 
         <div className="space-y-2 border-t border-white/5 pt-4 text-center">
           <p className="text-sm font-medium text-white">{formatLongDate(event.startsAt)}</p>
-          <p className="font-display text-2xl font-semibold text-gold">
+          <p className="font-display text-2xl font-semibold text-accent">
             {formatTime(event.startsAt)}
           </p>
           <p className="text-xs text-white/40">
@@ -105,7 +104,7 @@ function NextUpCard({ event, following }) {
         </div>
 
         <div className="mt-5">
-          <ReserveButton event={event} variant="gold" className="w-full !py-3.5" />
+          <ReserveButton event={event} variant="accent" className="w-full !py-3.5" />
         </div>
       </div>
 
@@ -141,22 +140,22 @@ export default function Home() {
       <section className="relative overflow-hidden bg-ink pb-20 pt-32 lg:pb-28 lg:pt-40">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-40 top-0 h-[600px] w-[600px] rounded-full bg-gold/[0.07] blur-[160px]"
+          className="pointer-events-none absolute -right-40 top-0 h-[600px] w-[600px] rounded-full bg-accent/[0.07] blur-[160px]"
         />
 
         <div className="shell relative z-10 flex flex-col items-center gap-16 lg:flex-row lg:items-center">
           <div className="w-full lg:w-[58%]">
-            <span className="eyebrow mb-6">Reserve · Watch · Cheer · Repeat</span>
+            <span className="eyebrow mb-6">Find · Reserve · Turn up</span>
             <h1 className="font-display text-5xl font-semibold leading-[1.05] tracking-tight text-white lg:text-7xl">
-              Great nights start around the same table.
+              A seat worth having, for a game worth watching.
             </h1>
             <p className="mt-7 max-w-xl text-lg leading-relaxed text-white/50">
-              Home Game Live partners with exceptional venues to host unforgettable sports watch
-              parties — the games, the atmosphere, and the seats you'll actually want.
+              Front Row lists matches at venues picked for the things that actually matter on a
+              matchday — the screens, the sound, and whether the kitchen is still open at full time.
             </p>
 
             <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-              <Link to="/events" className="btn-gold">
+              <Link to="/events" className="btn-accent">
                 Reserve Your Seat <ArrowRight size={17} />
               </Link>
               <Link to="/how-it-works" className="btn-ghost">
@@ -169,42 +168,34 @@ export default function Home() {
                 {[0, 1, 2, 3].map((i) => (
                   <span
                     key={i}
-                    className="h-10 w-10 rounded-full border-2 border-ink bg-gold/20"
+                    className="h-10 w-10 rounded-full border-2 border-ink bg-accent/20"
                   />
                 ))}
-                <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-gold text-xs font-bold text-ink">
-                  500+
+                <span className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-ink bg-accent text-[10px] font-bold text-ink">
+                  2k+
                 </span>
               </div>
               <p className="text-sm text-white/40">
-                <span className="font-medium text-white/70">500+ players</span> have joined game
-                nights.
+                <span className="font-medium text-white/70">2,000+ seats</span> reserved so far this
+                season.
               </p>
             </div>
           </div>
 
           <div className="relative w-full lg:w-[42%]">
-            <div className="absolute inset-0 overflow-hidden rounded-[2rem] shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
-              <img
-                src={asset('images/hero-watch-party.png')}
-                alt="Friends cheering at a sports watch party"
-                fetchpriority="high"
-                decoding="async"
-                className="h-full w-full object-cover"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-r from-ink via-ink/40 to-transparent lg:from-ink/90 lg:via-ink/20"
-              />
-              <div
-                aria-hidden="true"
-                className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent"
-              />
+            {/* Photography slot. Drop an <img> in here when there is real
+                imagery; the gradient stands in until then. */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 overflow-hidden rounded-[2rem] bg-gradient-to-br from-[#1b2233] via-[#141a27] to-[#0b0e16] shadow-[0_20px_60px_rgba(0,0,0,0.4)]"
+            >
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_25%,rgba(108,140,255,0.18),transparent_62%)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent" />
             </div>
 
             <div className="relative flex min-h-[560px] items-center justify-center p-4 lg:p-6">
               {loading ? (
-                <div className="h-[500px] w-full max-w-sm animate-pulse rounded-[2rem] border border-white/[0.06] bg-ink-card/80" />
+                <div className="h-[500px] w-full max-w-sm animate-pulse rounded-[2rem] border border-white/[0.06] bg-surface/80" />
               ) : (
                 <NextUpCard event={next} following={upcoming[1]} />
               )}
@@ -214,11 +205,11 @@ export default function Home() {
       </section>
 
       {/* -------------------------------------------------------- schedule */}
-      <section id="games" className="bg-cream py-20 lg:py-28">
+      <section id="games" className="bg-paper py-20 lg:py-28">
         <div className="shell">
           <div className="mb-12 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <span className="mb-4 block font-mono text-xs uppercase tracking-[0.2em] text-gold">
+              <span className="mb-4 block font-mono text-xs uppercase tracking-[0.2em] text-accent">
                 The Schedule
               </span>
               <h2 className="font-display text-4xl font-semibold tracking-tight text-ink lg:text-5xl">
@@ -253,7 +244,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               to="/events"
-              className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.14em] text-ink transition-colors hover:text-gold"
+              className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-[0.14em] text-ink transition-colors hover:text-accent"
             >
               View all upcoming events <ArrowRight size={15} />
             </Link>
@@ -265,21 +256,21 @@ export default function Home() {
       <section id="why" className="bg-ink py-20 lg:py-28">
         <div className="shell">
           <div className="mx-auto max-w-2xl text-center">
-            <span className="eyebrow mb-4">The Difference</span>
+            <span className="eyebrow mb-4">What We Check</span>
             <h2 className="font-display text-4xl font-semibold tracking-tight text-white lg:text-5xl">
-              Why Home Game Live
+              Not every bar with a screen
             </h2>
             <p className="mt-5 text-lg leading-relaxed text-white/50">
-              We don't list events. We curate nights worth showing up for — at venues worth being
-              seen at.
+              Plenty of places show the match. Fewer are worth planning an evening around. We visit
+              each one before it goes on the list.
             </p>
           </div>
 
           <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {WHY.map(({ icon: Icon, title, body }, i) => (
               <Reveal key={title} delay={i * 90} className="h-full">
-                <div className="h-full rounded-3xl border border-white/[0.06] bg-white/[0.02] p-7 transition-colors duration-300 hover:border-gold/25 hover:bg-white/[0.04]">
-                  <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+                <div className="h-full rounded-3xl border border-white/[0.06] bg-white/[0.02] p-7 transition-colors duration-300 hover:border-accent/25 hover:bg-white/[0.04]">
+                  <span className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/10 text-accent">
                     <Icon size={22} />
                   </span>
                   <h3 className="font-display text-lg font-semibold text-white">{title}</h3>
@@ -292,7 +283,7 @@ export default function Home() {
       </section>
 
       {/* ----------------------------------------------------------- venue */}
-      <section id="venue" className="bg-ink-card py-20 lg:py-28">
+      <section id="venue" className="bg-surface py-20 lg:py-28">
         <div className="shell">
           <div className="mb-12 text-center">
             <span className="eyebrow mb-4">The Venue</span>
@@ -307,7 +298,7 @@ export default function Home() {
               className="flex min-h-[380px] items-end rounded-[2rem] p-8"
             >
               <div className="relative">
-                <span className="inline-flex items-center rounded-full bg-gold px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink">
+                <span className="inline-flex items-center rounded-full bg-accent px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink">
                   Featured Partner
                 </span>
                 <p className="mt-4 flex items-center gap-1.5 text-sm text-white/70">
@@ -328,7 +319,7 @@ export default function Home() {
                     <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-white/35">
                       {label}
                     </p>
-                    <p className="mt-2 font-display text-lg font-semibold text-gold">{score}/5</p>
+                    <p className="mt-2 font-display text-lg font-semibold text-accent">{score}/5</p>
                   </div>
                 ))}
               </div>
@@ -336,14 +327,14 @@ export default function Home() {
               <ul className="mt-8 space-y-3">
                 {featuredVenue.features.map((feature) => (
                   <li key={feature} className="flex items-start gap-3 text-sm text-white/60">
-                    <Check size={16} className="mt-0.5 flex-shrink-0 text-gold" />
+                    <Check size={16} className="mt-0.5 flex-shrink-0 text-accent" />
                     {feature}
                   </li>
                 ))}
               </ul>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Link to={`/venues/${featuredVenue.slug}`} className="btn-gold">
+                <Link to={`/venues/${featuredVenue.slug}`} className="btn-accent">
                   Learn About {featuredVenue.shortName} <ArrowRight size={16} />
                 </Link>
                 <Link to="/venues" className="btn-ghost">
@@ -361,7 +352,7 @@ export default function Home() {
           <div className="relative overflow-hidden rounded-[2rem] border border-white/[0.06] px-8 py-16 text-center lg:px-16 lg:py-20">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(232,176,74,0.12),transparent_65%)]"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(108,140,255,0.12),transparent_65%)]"
             />
             <div className="relative mx-auto max-w-2xl">
               <span className="eyebrow mb-4">For Venues</span>
@@ -369,10 +360,10 @@ export default function Home() {
                 Own a great venue?
               </h2>
               <p className="mt-5 text-lg leading-relaxed text-white/50">
-                Partner with Home Game Live to fill seats during sports watch parties, attract new
+                Partner with Front Row to fill seats during sports watch parties, attract new
                 customers, and create game-day experiences that keep them coming back.
               </p>
-              <Link to="/partners" className="btn-gold mt-9">
+              <Link to="/partners" className="btn-accent mt-9">
                 Become a Venue Partner <ArrowUpRight size={17} />
               </Link>
             </div>

@@ -1,16 +1,18 @@
+import { brand, contact } from '../config';
+
 export const site = {
-  name: 'Home Game Live',
-  tagline: 'Great nights start around the same table.',
+  name: brand.name,
+  tagline: 'Good games deserve a good room.',
   description:
-    'Discover and reserve seats for sports watch parties at premium venues across Metro Vancouver.',
-  email: 'hello@homegamelive.ca',
-  phone: '(604) 555-0142',
-  serviceArea: 'Metro Vancouver, BC',
+    'Find and reserve a seat for a match at venues chosen for how they actually feel on a matchday.',
+  email: contact.email,
+  phone: contact.phone,
+  serviceArea: contact.serviceArea,
 
   /**
    * Social profiles are intentionally empty. The footer renders an icon only
-   * for entries that have a real URL, so the site never ships the dead `#`
-   * links the original had. Drop the real handles in here and the row appears.
+   * for entries with a real URL, so the site never ships a placeholder link
+   * that goes nowhere.
    */
   social: [
     { name: 'Instagram', url: '' },

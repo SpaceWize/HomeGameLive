@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { LogOut, Menu, Ticket, User, X } from 'lucide-react';
 import { useAuth } from '../lib/auth.jsx';
+import { brand } from '../config';
 
 const NAV = [
   { to: '/events', label: 'This Week' },
@@ -11,13 +12,14 @@ const NAV = [
 ];
 
 function Wordmark() {
+  const [first, ...rest] = brand.nameParts;
   return (
-    <Link to="/" className="flex items-center gap-3" aria-label="Home Game Live — home">
-      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gold font-display text-sm font-bold text-ink">
-        HG
+    <Link to="/" className="flex items-center gap-3" aria-label={`${brand.name} — home`}>
+      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent font-display text-sm font-bold text-ink">
+        {brand.monogram}
       </span>
       <span className="font-display text-lg font-semibold tracking-tight text-white">
-        Home Game <span className="text-gold">Live</span>
+        {first} {rest.length > 0 && <span className="text-accent">{rest.join(' ')}</span>}
       </span>
     </Link>
   );
@@ -73,14 +75,14 @@ export default function Header() {
 
   const linkClass = ({ isActive }) =>
     `text-sm transition-colors duration-200 ${
-      isActive ? 'text-gold' : 'text-white/60 hover:text-white'
+      isActive ? 'text-accent' : 'text-white/60 hover:text-white'
     }`;
 
   return (
     <>
       <a
         href="#main"
-        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-gold focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink"
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-sm focus:font-semibold focus:text-ink"
       >
         Skip to content
       </a>
@@ -111,7 +113,7 @@ export default function Header() {
                   aria-haspopup="menu"
                   className="flex items-center gap-2 rounded-full border border-white/15 py-2 pl-2 pr-4 text-sm text-white transition-colors hover:border-white/30"
                 >
-                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gold text-xs font-bold text-ink">
+                  <span className="flex h-7 w-7 items-center justify-center rounded-full bg-accent text-xs font-bold text-ink">
                     {user.name.charAt(0).toUpperCase()}
                   </span>
                   {user.name.split(' ')[0]}
@@ -120,7 +122,7 @@ export default function Header() {
                 {menuOpen && (
                   <div
                     role="menu"
-                    className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-white/10 bg-ink-card shadow-2xl"
+                    className="absolute right-0 top-full mt-2 w-56 overflow-hidden rounded-2xl border border-white/10 bg-surface shadow-2xl"
                   >
                     <div className="border-b border-white/5 px-4 py-3">
                       <p className="truncate text-sm font-medium text-white">{user.name}</p>
@@ -134,7 +136,7 @@ export default function Header() {
                       <Ticket size={15} />
                       My reservations
                       {myReservations.length > 0 && (
-                        <span className="ml-auto rounded-full bg-gold px-2 py-0.5 text-[10px] font-bold text-ink">
+                        <span className="ml-auto rounded-full bg-accent px-2 py-0.5 text-[10px] font-bold text-ink">
                           {myReservations.length}
                         </span>
                       )}
@@ -165,7 +167,7 @@ export default function Header() {
 
             <Link
               to="/events"
-              className="rounded-full bg-gold px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-gold-light"
+              className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-ink transition-colors hover:bg-accent-light"
             >
               Reserve a Seat
             </Link>
@@ -192,7 +194,7 @@ export default function Header() {
                 to={item.to}
                 className={({ isActive }) =>
                   `border-b border-white/5 py-4 font-display text-2xl font-semibold ${
-                    isActive ? 'text-gold' : 'text-white'
+                    isActive ? 'text-accent' : 'text-white'
                   }`
                 }
               >
@@ -222,7 +224,7 @@ export default function Header() {
                   Sign In
                 </Link>
               )}
-              <Link to="/events" className="btn-gold w-full">
+              <Link to="/events" className="btn-accent w-full">
                 Reserve a Seat
               </Link>
             </div>

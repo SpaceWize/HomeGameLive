@@ -69,7 +69,7 @@ export function Privacy() {
         <div>
           <h2>If that changes</h2>
           <p className="mt-3">
-            Should Home Game Live later add real accounts, payments, or an email service, this page
+            Should Front Row later add real accounts, payments, or an email service, this page
             will be updated before that happens and will name each processor involved and what it
             receives.
           </p>
@@ -79,11 +79,11 @@ export function Privacy() {
           <h2>Questions</h2>
           <p className="mt-3">
             Email{' '}
-            <a href={`mailto:${site.email}`} className="text-gold hover:underline">
+            <a href={`mailto:${site.email}`} className="text-accent hover:underline">
               {site.email}
             </a>{' '}
             or use the{' '}
-            <Link to="/contact" className="text-gold hover:underline">
+            <Link to="/contact" className="text-accent hover:underline">
               contact form
             </Link>
             .
@@ -100,14 +100,14 @@ export function Terms() {
       <PageHeader
         eyebrow="Legal"
         title="Terms of service"
-        lead="The rules for using Home Game Live and reserving seats at partner venues."
+        lead="The rules for using Front Row and reserving seats at partner venues."
       />
 
       <Prose>
         <div>
           <h2>Using this site</h2>
           <p className="mt-3">
-            Home Game Live lists sports watch parties hosted at independent partner venues and lets
+            Front Row lists sports watch parties hosted at independent partner venues and lets
             you reserve a seat at them. Using the site means you agree to these terms.
           </p>
         </div>
@@ -146,7 +146,7 @@ export function Terms() {
             You are responsible for the accuracy of the details on your account. Because accounts on
             this build are stored locally in your browser, we cannot recover an account or reset a
             password on your behalf — see the{' '}
-            <Link to="/privacy" className="text-gold hover:underline">
+            <Link to="/privacy" className="text-accent hover:underline">
               privacy page
             </Link>{' '}
             for detail.
@@ -156,7 +156,7 @@ export function Terms() {
         <div>
           <h2>Liability</h2>
           <p className="mt-3">
-            Home Game Live provides listings and reservations. We are not liable for the food,
+            Front Row provides listings and reservations. We are not liable for the food,
             drink, service, or conduct at a partner venue, or for a broadcast being changed,
             delayed, or unavailable.
           </p>
@@ -166,7 +166,7 @@ export function Terms() {
           <h2>Contact</h2>
           <p className="mt-3">
             Questions about these terms:{' '}
-            <a href={`mailto:${site.email}`} className="text-gold hover:underline">
+            <a href={`mailto:${site.email}`} className="text-accent hover:underline">
               {site.email}
             </a>
             .

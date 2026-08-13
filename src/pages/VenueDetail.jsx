@@ -21,7 +21,7 @@ export default function VenueDetail() {
         <div className="shell">
           <Link
             to="/venues"
-            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-white/40 transition-colors hover:text-gold"
+            className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.14em] text-white/40 transition-colors hover:text-accent"
           >
             <ArrowLeft size={14} /> All venues
           </Link>
@@ -29,12 +29,12 @@ export default function VenueDetail() {
           <div className="mt-8 grid gap-12 lg:grid-cols-2 lg:items-center">
             <div>
               {venue.featured && (
-                <span className="mb-5 inline-flex rounded-full bg-gold px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink">
+                <span className="mb-5 inline-flex rounded-full bg-accent px-3 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] text-ink">
                   Featured Partner
                 </span>
               )}
               <p className="mb-3 flex items-center gap-1.5 text-sm text-white/50">
-                <MapPin size={14} className="text-gold" /> {venue.neighbourhood} · {venue.city},{' '}
+                <MapPin size={14} className="text-accent" /> {venue.neighbourhood} · {venue.city},{' '}
                 {venue.region}
               </p>
               <h1 className="font-display text-4xl font-semibold tracking-tight text-white lg:text-6xl">
@@ -48,7 +48,7 @@ export default function VenueDetail() {
                     <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-white/35">
                       {label}
                     </p>
-                    <p className="mt-2 font-display text-lg font-semibold text-gold">{score}/5</p>
+                    <p className="mt-2 font-display text-lg font-semibold text-accent">{score}/5</p>
                   </div>
                 ))}
               </div>
@@ -76,7 +76,7 @@ export default function VenueDetail() {
                 key={feature}
                 className="flex items-start gap-3 rounded-2xl border border-white/[0.06] bg-white/[0.02] px-5 py-4 text-sm text-white/60"
               >
-                <Check size={16} className="mt-0.5 flex-shrink-0 text-gold" />
+                <Check size={16} className="mt-0.5 flex-shrink-0 text-accent" />
                 {feature}
               </li>
             ))}
@@ -84,7 +84,7 @@ export default function VenueDetail() {
         </div>
       </header>
 
-      <section className="bg-cream py-16 lg:py-24">
+      <section className="bg-paper py-16 lg:py-24">
         <div className="shell">
           <h2 className="mb-10 font-display text-3xl font-semibold tracking-tight text-ink">
             Upcoming at {venue.name}

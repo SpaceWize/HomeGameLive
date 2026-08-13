@@ -44,7 +44,7 @@ export default function ReserveButton({ event, variant = 'dark', className = '',
   if (reserved) {
     return (
       <span
-        className={`btn cursor-default border border-gold/40 bg-gold/10 px-5 py-2.5 text-gold ${className}`}
+        className={`btn cursor-default border border-accent/40 bg-accent/10 px-5 py-2.5 text-accent ${className}`}
       >
         <Check size={15} /> Seat reserved
       </span>
@@ -63,9 +63,9 @@ export default function ReserveButton({ event, variant = 'dark', className = '',
   }
 
   const tone =
-    variant === 'gold'
-      ? 'bg-gold text-ink hover:bg-gold-light shadow-[0_8px_24px_rgba(244,180,85,0.3)]'
-      : 'bg-ink text-white group-hover:bg-gold group-hover:text-ink';
+    variant === 'accent'
+      ? 'bg-accent text-ink hover:bg-accent-light shadow-[0_8px_24px_rgba(138,163,255,0.3)]'
+      : 'bg-ink text-white group-hover:bg-accent group-hover:text-ink';
 
   return (
     <>
@@ -80,7 +80,7 @@ export default function ReserveButton({ event, variant = 'dark', className = '',
         {!busy && <ArrowRight size={15} className="transition-transform group-hover:translate-x-0.5" />}
       </button>
       {error && (
-        <p role="alert" className="mt-2 text-xs text-flames">
+        <p role="alert" className="mt-2 text-xs text-alert">
           {error}
         </p>
       )}

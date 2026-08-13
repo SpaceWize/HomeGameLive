@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { PageHeader } from '../components/Primitives';
 import { getVenues } from '../lib/events';
+import { contact } from '../config';
 
 const VALUES = [
   {
@@ -25,37 +26,37 @@ export default function About() {
     <>
       <PageHeader
         eyebrow="About Us"
-        title="We don't list events. We curate nights."
-        lead="Home Game Live started from a simple frustration: finding somewhere good to watch the game was harder than it should be, and the places worth going were the hardest to find."
+        title="A short list, kept short on purpose."
+        lead="Front Row exists because the hard part was never finding a bar showing the match. It was finding one where watching it was any good."
       />
 
       <section className="bg-ink py-16 lg:py-24">
         <div className="shell grid gap-14 lg:grid-cols-[1.2fr_1fr]">
           <div className="space-y-6 text-lg leading-relaxed text-white/55">
             <p>
-              Every sports bar claims to be the place to watch the game. Most aren't. The screen is
-              in the wrong corner, the sound is off, the kitchen closed an hour ago, and nobody
-              around you actually cares who wins.
+              Most rooms advertise the fixture and leave it there. You arrive to find the screen
+              angled away from half the seats, the commentary muted under a playlist, and a kitchen
+              that closed at the interval.
             </p>
             <p>
-              We started Home Game Live to fix the matching problem. We find rooms across Metro
-              Vancouver that genuinely deliver on game day, work with them on the fixtures that suit
-              their crowd, and make sure there's a seat waiting when you arrive.
+              So we go and sit in them first. We check the sightlines from the bad seats, not the
+              good ones, and we ask the operator what they can actually commit to on a busy night.
+              The ones that hold up get listed. Most do not.
             </p>
             <p>
-              The result is a small, deliberately short list of nights we'd personally show up to —
-              and a growing group of people who keep coming back to them.
+              What is left is a deliberately small set of fixtures at rooms we would pick ourselves,
+              with a seat held for you before you leave the house.
             </p>
           </div>
 
           <aside className="space-y-4">
             {[
-              ['500+', 'players have joined game nights'],
-              [`${venues.length}`, 'partner venues across Metro Vancouver'],
-              ['1', 'night a week worth clearing your calendar for'],
+              ['2,000+', 'seats reserved so far this season'],
+              [`${venues.length}`, `partner venues across ${contact.serviceArea}`],
+              ['1 in 5', 'rooms we visit make the list'],
             ].map(([stat, label]) => (
               <div key={label} className="rounded-3xl border border-white/[0.07] bg-white/[0.02] p-7">
-                <p className="font-display text-4xl font-semibold text-gold">{stat}</p>
+                <p className="font-display text-4xl font-semibold text-accent">{stat}</p>
                 <p className="mt-2 text-sm text-white/45">{label}</p>
               </div>
             ))}
@@ -63,7 +64,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-ink-card py-16 lg:py-24">
+      <section className="bg-surface py-16 lg:py-24">
         <div className="shell">
           <h2 className="mb-12 font-display text-3xl font-semibold tracking-tight text-white lg:text-4xl">
             What we care about
@@ -78,7 +79,7 @@ export default function About() {
           </div>
 
           <div className="mt-14 flex flex-col gap-3 sm:flex-row">
-            <Link to="/events" className="btn-gold">
+            <Link to="/events" className="btn-accent">
               See this week's nights <ArrowRight size={16} />
             </Link>
             <Link to="/partners" className="btn-ghost">

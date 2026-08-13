@@ -26,7 +26,7 @@ export function VenueVisual({ venue, className = '', priority = false, children 
       />
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(232,176,74,0.16),transparent_60%)]"
+        className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(108,140,255,0.16),transparent_60%)]"
       />
       {children}
     </div>
@@ -63,9 +63,9 @@ export function TeamCrest({ team, size = 'md' }) {
 
 const BADGE_TONE = {
   'SOLD OUT': 'bg-white/10 text-white/60',
-  'FILLING FAST': 'bg-flames/20 text-[#ff8b9b]',
-  TONIGHT: 'bg-gold/20 text-gold',
-  TOMORROW: 'bg-gold/15 text-gold/90',
+  'FILLING FAST': 'bg-alert/20 text-[#ff8b9b]',
+  TONIGHT: 'bg-accent/20 text-accent',
+  TOMORROW: 'bg-accent/15 text-accent/90',
   'THIS WEEKEND': 'bg-white/10 text-white/70',
 };
 
@@ -74,7 +74,7 @@ export function Badge({ label, className = '' }) {
   return (
     <span
       className={`inline-flex items-center rounded-full px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.14em] ${
-        BADGE_TONE[label] ?? 'bg-gold/20 text-gold'
+        BADGE_TONE[label] ?? 'bg-accent/20 text-accent'
       } ${className}`}
     >
       {label}
@@ -91,13 +91,13 @@ export function SeatsLeft({ count, tone = 'dark' }) {
   return (
     <span
       className={`inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-wider ${
-        soldOut ? 'text-white/40' : urgent ? 'text-flames' : base
+        soldOut ? 'text-white/40' : urgent ? 'text-alert' : base
       }`}
     >
       <span
         aria-hidden="true"
         className={`h-1.5 w-1.5 rounded-full ${
-          soldOut ? 'bg-white/30' : urgent ? 'animate-pulse bg-flames' : 'bg-gold'
+          soldOut ? 'bg-white/30' : urgent ? 'animate-pulse bg-alert' : 'bg-accent'
         }`}
       />
       {soldOut ? 'Sold out' : `${count} seats left`}
@@ -128,8 +128,8 @@ export function PageHeader({ eyebrow, title, lead, children }) {
 export function Section({ id, tone = 'dark', className = '', children }) {
   const tones = {
     dark: 'bg-ink text-white',
-    card: 'bg-ink-card text-white',
-    cream: 'bg-cream text-ink',
+    card: 'bg-surface text-white',
+    paper: 'bg-paper text-ink',
   };
   return (
     <section id={id} className={`py-20 lg:py-28 ${tones[tone]} ${className}`}>
@@ -142,8 +142,8 @@ export function Section({ id, tone = 'dark', className = '', children }) {
 export function FormMessage({ tone = 'error', children }) {
   if (!children) return null;
   const tones = {
-    error: 'border-flames/40 bg-flames/10 text-[#ff9aa8]',
-    success: 'border-gold/40 bg-gold/10 text-gold',
+    error: 'border-alert/40 bg-alert/10 text-[#ff9aa8]',
+    success: 'border-accent/40 bg-accent/10 text-accent',
     info: 'border-white/15 bg-white/5 text-white/70',
   };
   return (
@@ -166,7 +166,7 @@ export function ComingSoon({ title, body, cta = true }) {
       <h2 className="font-display text-2xl font-semibold text-white">{title}</h2>
       <p className="mx-auto mt-4 max-w-md leading-relaxed text-white/50">{body}</p>
       {cta && (
-        <Link to="/contact" className="btn-gold mt-8">
+        <Link to="/contact" className="btn-accent mt-8">
           Get in touch
         </Link>
       )}

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { Check, Send } from 'lucide-react';
 import { subscribe } from '../lib/auth.jsx';
-import { asset } from '../lib/asset';
 import { FormMessage } from './Primitives';
 
 /**
@@ -35,19 +34,13 @@ export default function Newsletter() {
   return (
     <section className="relative overflow-hidden bg-ink py-24 lg:py-32">
       <div aria-hidden="true" className="absolute inset-0">
-        <img
-          src={asset('images/newsletter-bar.png')}
-          alt=""
-          loading="lazy"
-          decoding="async"
-          className="h-full w-full object-cover opacity-30"
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-[#161d2e] via-[#101521] to-[#0b0e16]" />
         <div className="absolute inset-0 bg-gradient-to-b from-ink/80 via-ink/70 to-ink/95" />
       </div>
 
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/10 blur-[140px]"
+        className="pointer-events-none absolute left-1/2 top-1/2 h-[400px] w-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/10 blur-[140px]"
       />
 
       <div className="relative z-10 mx-auto max-w-2xl px-6 text-center lg:px-10">
@@ -74,9 +67,9 @@ export default function Newsletter() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="your@email.com"
-            className="flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-white/30 focus:border-gold/50 focus:bg-white/10"
+            className="flex-1 rounded-full border border-white/15 bg-white/5 px-5 py-4 text-sm text-white outline-none transition-all duration-200 placeholder:text-white/30 focus:border-accent/50 focus:bg-white/10"
           />
-          <button type="submit" className="btn-gold whitespace-nowrap">
+          <button type="submit" className="btn-accent whitespace-nowrap">
             Notify Me <Send size={15} />
           </button>
         </form>

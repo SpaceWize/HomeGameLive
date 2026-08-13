@@ -1,36 +1,28 @@
-# Home Game Live
+# Front Row
 
-A rebuild of [game-night-social.base44.app](https://game-night-social.base44.app/#) — same brand and
-aesthetic, but with the broken parts actually working.
+A demo booking product for sports watch parties: browse fixtures, reserve a seat, manage your
+bookings. Built as a portfolio piece.
 
-## What was wrong with the original
+**Everything in it is fictional** — the brand, the venues, the clubs and the city are all invented,
+and the data is bundled with the app.
 
-Findings from auditing the deployed Base44 build:
+## What it does
 
-| Area | Original behaviour |
-| --- | --- |
-| **Sign In** | The nav link was `href="#games"`. It scrolled to the schedule. No auth existed anywhere in the app. |
-| **Reserve buttons** | Every one of them was a `<button>` with **no click handler at all** — purely decorative. Same for "Reserve on OpenTable". |
-| **Newsletter** | Called `preventDefault()`, flipped the button to "You're In!", cleared the input, and **discarded the email**. No request, no storage. |
-| **Schedule** | A hardcoded array compiled into the bundle, with dates as plain strings (`"THU JUL 24"`). Badges like "TONIGHT" were hand-typed and could never update. |
-| **Date drift** | The hero read "Thursday, May 15" while the schedule read "Jul 24 — Jul 30" — two hardcoded strings that had drifted apart. |
-| **Routing** | React Router was loaded but registered only `/` and `*`. One route. |
-| **Footer** | Roughly 20 links, all `href="#"`. |
-| **Fonts** | `--font-display` and `--font-body` were never overridden from the shadcn default, so every "display" heading rendered in the system UI font. |
-
-## What this build does instead
-
-- **Working local accounts.** Sign up / sign in, stored in `localStorage`. Passwords are salted and
-  SHA-256 hashed — never stored in plain text. No server, no data collection.
-- **Working reservations.** Reserve a seat, see it on your account page, cancel it. Signed-out
-  visitors are sent to sign in and returned to where they were.
-- **A newsletter form that does something** and says plainly that the address stayed in the browser.
-- **One source of truth for events** with real ISO dates. Day labels, "TONIGHT" / "TOMORROW" /
-  "FILLING FAST" badges, and the week range are all *derived*, so they cannot drift.
-- **18 real routes.** Every link in the nav and footer goes somewhere real. There are no `#` links.
-- **Real typography** — Manrope, Inter, Instrument Serif and JetBrains Mono, self-hosted so there is
-  no font-CDN request.
-- Skip-to-content link, visible focus rings, `aria-expanded` menus, and reduced-motion support.
+- **Local accounts.** Sign up and sign in, stored in `localStorage`. Passwords are salted and
+  SHA-256 hashed rather than stored in plain text. No server, no data collection.
+- **Reservations.** Hold a seat, see it on your account page, cancel it. Signed-out visitors are
+  routed through sign-in and returned to where they were.
+- **One source of truth for the schedule.** Events carry real ISO timestamps; day labels, the
+  `TONIGHT` / `TOMORROW` / `FILLING FAST` badges, the week range and seat counts are all *derived*,
+  so nothing can drift out of sync.
+- **Live countdown** to kickoff that reports the fixture as upcoming, live, then finished.
+- **Seat meters** showing capacity as a bar, because "18 seats left" reads differently at 18-of-20
+  than at 18-of-120.
+- **Add to calendar** generating a valid `.ics` entirely client-side — correct CRLF endings, RFC
+  5545 line folding, escaped separators and a reminder alarm. No API key, no network request.
+- **18 routes**, every nav and footer link resolving to a real page. No placeholder links.
+- Skip-to-content link, visible focus rings, `aria-expanded` menus, `prefers-reduced-motion`
+  support, and no horizontal overflow at mobile widths.
 
 ## Running it
 
@@ -39,45 +31,48 @@ npm install
 npm run dev
 ```
 
-## Updating the schedule without touching code
+## Renaming it
 
-By default the site renders `src/data/events.json`.
+The brand lives in one place — `src/config.js`:
 
-To hand schedule control to someone non-technical, publish a Google Sheet as CSV
-(**File → Share → Publish to web → select the sheet → Comma-separated values**) and set:
-
+```js
+export const brand = { nameParts: ['Front', 'Row'], monogram: 'FR' };
 ```
-VITE_EVENTS_SHEET_CSV="https://docs.google.com/.../pub?output=csv"
-```
+
+Change that and the header, footer, page titles and calendar exports all follow. The palette is in
+`tailwind.config.js`, named by role (`ink`, `surface`, `accent`, `paper`, `alert`) rather than by
+hue, so re-skinning is a handful of hex values.
+
+## Driving the schedule from a spreadsheet
+
+By default the app renders `src/data/events.json`, which needs no network call and cannot fail.
+
+To let a non-technical maintainer edit the schedule instead, publish a Google Sheet as CSV
+(**File → Share → Publish to web → pick the tab → Comma-separated values**) and paste the URL into
+`EVENTS_SHEET_CSV` in `src/config.js`. It must end in `/pub?output=csv` — `/pubhtml` returns a web
+page rather than data.
 
 Columns: `slug, title, home, homeColor, away, awayColor, league, startsAt, venue, capacity, seatsTaken, blurb`
 
-`events-template.csv` in this repo holds the current schedule in exactly that shape — import it
-into a blank Sheet (**File → Import → Upload**) rather than building the columns by hand.
+The `venue` column accepts either a slug or the display name. Rows missing a title or a readable
+date are skipped and reported in the console rather than rendering broken output, and `seatsTaken`
+is clamped to `capacity`. If the sheet is unreachable the bundled data is used, so the schedule can
+never render empty.
 
-The `venue` column accepts either the slug (`par-4-kitchen-bar`) or the display name
-(`Par 4 Kitchen & Bar`), so whoever maintains the sheet can type what they'd naturally type.
+Open the console and check `__hglEvents` to see which source is live — a working sheet and a
+missing one otherwise look identical.
 
-No API key is needed. Only the sheet *URL* is baked in at build time — the fetch happens on page
-load, so **edits go live without a redeploy** (Google caches published CSV for a few minutes). If
-the sheet is ever unreachable the bundled JSON is used instead, so the schedule can never render
-empty.
-
-### Adding one event without a sheet
-
-Edit `src/data/events.json` — on github.com directly if you like. Pushing to `main` rebuilds and
-redeploys automatically. `seatsLeft` is computed as `capacity - seatsTaken`, and the
-`TONIGHT` / `TOMORROW` / `FILLING FAST` badges are derived from `startsAt` and the seat counts, so
-there is nothing else to keep in sync.
-
-> **Why a Sheet rather than Google Calendar:** seat availability changes daily, and Google Calendar
-> has no field for it — you would end up parsing "18 seats left" out of the description. A Sheet
-> gives `seatsTaken`, `capacity`, `venue` and `league` each a real column.
+> **Why a sheet rather than a calendar API:** seat availability changes with every booking, and a
+> calendar has nowhere to put it. A sheet gives `capacity` and `seatsTaken` real columns. The
+> better long-term answer is a database that derives remaining seats from booking records instead
+> of anyone typing a number.
 
 ## Deploying
 
-Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds and publishes to GitHub
-Pages. Set repository **Settings → Pages → Source → GitHub Actions** once to enable it.
+Pushing to `main` runs `.github/workflows/deploy.yml`, which builds and publishes to GitHub Pages.
+Enable it once under **Settings → Pages → Source → GitHub Actions**.
+
+`REPO_BASE` in `vite.config.js` must match the repository name exactly, including capitalisation.
 
 ## Stack
 

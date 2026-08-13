@@ -1,9 +1,9 @@
 /**
  * Resolves a path in /public against the deploy base.
  *
- * GitHub Pages serves this project from /HomeGameLive/, so a bare "/images/x.png"
- * would 404 in production while working fine in dev. Vite exposes the configured
- * base as BASE_URL, and everything in /public sits directly under it.
+ * GitHub Pages serves a project site from a subpath rather than the domain
+ * root, so a bare "/images/x.png" works in dev and 404s in production. Vite
+ * exposes the configured base as BASE_URL, and /public sits directly under it.
  */
 export function asset(path) {
   return `${import.meta.env.BASE_URL}${path}`.replace(/([^:]\/)\/+/g, '$1');

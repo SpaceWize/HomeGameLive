@@ -27,11 +27,11 @@ export default function Venues() {
                 <Link
                   key={venue.slug}
                   to={`/venues/${venue.slug}`}
-                  className="group overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.02] transition-colors hover:border-gold/25"
+                  className="group overflow-hidden rounded-3xl border border-white/[0.07] bg-white/[0.02] transition-colors hover:border-accent/25"
                 >
                   <VenueVisual venue={venue} className="flex h-44 items-end p-6">
                     {venue.featured && (
-                      <span className="absolute right-5 top-5 rounded-full bg-gold px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink">
+                      <span className="absolute right-5 top-5 rounded-full bg-accent px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-[0.12em] text-ink">
                         Featured
                       </span>
                     )}
@@ -41,7 +41,7 @@ export default function Venues() {
                   </VenueVisual>
 
                   <div className="p-6">
-                    <h2 className="font-display text-xl font-semibold tracking-tight text-white transition-colors group-hover:text-gold">
+                    <h2 className="font-display text-xl font-semibold tracking-tight text-white transition-colors group-hover:text-accent">
                       {venue.name}
                     </h2>
                     <p className="mt-2 text-sm text-white/40">{venue.tagline}</p>
@@ -52,7 +52,7 @@ export default function Venues() {
                       </span>
                       <ArrowRight
                         size={15}
-                        className="text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-gold"
+                        className="text-white/30 transition-transform group-hover:translate-x-1 group-hover:text-accent"
                       />
                     </div>
                   </div>

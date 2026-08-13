@@ -28,7 +28,7 @@ export default function Account() {
         <div className="shell max-w-4xl">
           {myReservations.length === 0 ? (
             <div className="rounded-3xl border border-white/10 bg-white/[0.02] px-8 py-20 text-center">
-              <span className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gold/10 text-gold">
+              <span className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-accent/10 text-accent">
                 <Ticket size={24} />
               </span>
               <h2 className="font-display text-2xl font-semibold text-white">No reservations yet</h2>
@@ -36,7 +36,7 @@ export default function Account() {
                 Browse this week's watch parties and hold a seat — it takes one click and costs
                 nothing.
               </p>
-              <Link to="/events" className="btn-gold mt-8">
+              <Link to="/events" className="btn-accent mt-8">
                 Find a game night
               </Link>
             </div>
@@ -44,7 +44,7 @@ export default function Account() {
             <div className="space-y-14">
               {upcoming.length > 0 && (
                 <div>
-                  <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.18em] text-gold">
+                  <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.18em] text-accent">
                     Upcoming
                   </h2>
                   <ul className="space-y-4">
@@ -55,21 +55,21 @@ export default function Account() {
                       >
                         <div className="min-w-0">
                           <h3 className="font-display text-lg font-semibold text-white">
-                            <Link to={`/events/${r.eventSlug}`} className="hover:text-gold">
+                            <Link to={`/events/${r.eventSlug}`} className="hover:text-accent">
                               {r.eventTitle}
                             </Link>
                           </h3>
                           <div className="mt-2.5 flex flex-wrap items-center gap-x-5 gap-y-1.5 text-xs text-white/45">
                             <span className="flex items-center gap-1.5">
-                              <Calendar size={12} className="text-gold" />
+                              <Calendar size={12} className="text-accent" />
                               {formatLongDate(r.startsAt)}
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <Clock size={12} className="text-gold" />
+                              <Clock size={12} className="text-accent" />
                               {formatTime(r.startsAt)}
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <MapPin size={12} className="text-gold" />
+                              <MapPin size={12} className="text-accent" />
                               {r.venueName}
                             </span>
                           </div>
@@ -90,7 +90,7 @@ export default function Account() {
                           <button
                             type="button"
                             onClick={() => cancelReservation(r.id)}
-                            className="btn border border-white/12 px-4 py-2.5 text-xs text-white/55 hover:border-flames/50 hover:text-flames"
+                            className="btn border border-white/12 px-4 py-2.5 text-xs text-white/55 hover:border-alert/50 hover:text-alert"
                           >
                             <Trash2 size={14} /> Cancel
                           </button>
@@ -122,7 +122,7 @@ export default function Account() {
                           type="button"
                           onClick={() => cancelReservation(r.id)}
                           aria-label={`Remove ${r.eventTitle} from history`}
-                          className="text-white/25 transition-colors hover:text-flames"
+                          className="text-white/25 transition-colors hover:text-alert"
                         >
                           <Trash2 size={15} />
                         </button>

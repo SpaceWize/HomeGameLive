@@ -14,7 +14,7 @@ export default function SeatMeter({ capacity, seatsLeft, tone = 'dark', showLabe
 
   const track = tone === 'dark' ? 'bg-white/10' : 'bg-ink/10';
   const muted = tone === 'dark' ? 'text-white/40' : 'text-ink/40';
-  const fill = soldOut ? 'bg-white/25' : urgent ? 'bg-flames' : 'bg-gold';
+  const fill = soldOut ? 'bg-white/25' : urgent ? 'bg-alert' : 'bg-accent';
 
   return (
     <div className="w-full">
@@ -38,7 +38,7 @@ export default function SeatMeter({ capacity, seatsLeft, tone = 'dark', showLabe
             'Fully booked'
           ) : (
             <>
-              <span className={urgent ? 'text-flames' : tone === 'dark' ? 'text-white/70' : 'text-ink/70'}>
+              <span className={urgent ? 'text-alert' : tone === 'dark' ? 'text-white/70' : 'text-ink/70'}>
                 {taken}
               </span>{' '}
               of {capacity} seats taken
